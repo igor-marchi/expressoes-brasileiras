@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import { open, storedFavorites } from "./helpers";
+import { open, storedFavorites, TOTAL_EXPRESSIONS } from "./helpers";
 
 test.describe("favorites on the home screen", () => {
   test("Favoritar toggles the button state", async ({ page }) => {
@@ -75,7 +75,7 @@ test.describe("favorites on the list", () => {
     await page.getByRole("button", { name: "Remover dos favoritos" }).click();
     await expect(
       page.getByRole("button", { name: "Adicionar aos favoritos" }),
-    ).toHaveCount(8);
+    ).toHaveCount(TOTAL_EXPRESSIONS);
     expect(await storedFavorites(page)).toEqual([]);
   });
 

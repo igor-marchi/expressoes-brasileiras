@@ -12,7 +12,9 @@ test.describe("all expressions", () => {
       page.getByText(`${TOTAL_EXPRESSIONS} expressões. Escolha uma`),
     ).toBeVisible();
     await expect(page.locator("main a")).toHaveCount(TOTAL_EXPRESSIONS);
-    await expect(page.getByText(`1 de ${TOTAL_EXPRESSIONS}`)).toBeVisible();
+    await expect(
+      page.getByText(`1 de ${TOTAL_EXPRESSIONS}`, { exact: true }),
+    ).toBeVisible();
     await expect(
       page.getByText("Fracassar, ver um plano dar errado."),
     ).toBeVisible();
@@ -34,10 +36,12 @@ test.describe("all expressions", () => {
   test("search filters by title", async ({ page }) => {
     await open(page, "/expressions");
 
-    await page.getByLabel("Buscar expressão").fill("jaca");
+    await page.getByLabel("Buscar expressão").fill("cavalinho");
 
     await expect(page.locator("main a")).toHaveCount(1);
-    await expect(page.getByRole("link", { name: /Pé na jaca/ })).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: /Tirar o cavalinho da chuva/ }),
+    ).toBeVisible();
   });
 
   test("search ignores accents and letter case", async ({ page }) => {
@@ -52,7 +56,9 @@ test.describe("all expressions", () => {
   test("search also matches the meaning", async ({ page }) => {
     await open(page, "/expressions");
 
-    await page.getByLabel("Buscar expressão").fill("escandalo");
+    await page
+      .getByLabel("Buscar expressão")
+      .fill("perder a compostura em publico");
 
     await expect(page.locator("main a")).toHaveCount(1);
     await expect(
@@ -73,7 +79,7 @@ test.describe("all expressions", () => {
     await open(page, "/expressions");
     const search = page.getByLabel("Buscar expressão");
 
-    await search.fill("jaca");
+    await search.fill("cavalinho");
     await expect(page.locator("main a")).toHaveCount(1);
 
     await search.fill("");
@@ -85,8 +91,10 @@ test.describe("all expressions", () => {
   }) => {
     await open(page, "/expressions");
 
-    await page.getByLabel("Buscar expressão").fill("jaca");
+    await page.getByLabel("Buscar expressão").fill("pe na jaca");
 
-    await expect(page.getByText(`4 de ${TOTAL_EXPRESSIONS}`)).toBeVisible();
+    await expect(
+      page.getByText(`4 de ${TOTAL_EXPRESSIONS}`, { exact: true }),
+    ).toBeVisible();
   });
 });

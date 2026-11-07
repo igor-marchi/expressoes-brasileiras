@@ -1,6 +1,11 @@
 import { expect, test, type Page } from "@playwright/test";
 
-import { open, TOTAL_EXPRESSIONS } from "./helpers";
+import {
+  FIRST_EXPRESSION,
+  LAST_EXPRESSION,
+  open,
+  TOTAL_EXPRESSIONS,
+} from "./helpers";
 
 test.describe("home", () => {
   test("shows the first expression with its details", async ({ page }) => {
@@ -31,14 +36,12 @@ test.describe("home", () => {
     await expect(page.getByText(`2 de ${TOTAL_EXPRESSIONS}`)).toBeVisible();
   });
 
-  test("Próximo goes through every expression and wraps to the first", async ({
-    page,
-  }) => {
+  test("Próximo goes through the expressions one by one", async ({ page }) => {
     await open(page, "/");
     const title = page.getByRole("heading", { level: 1 });
     const seen = [await title.innerText()];
 
-    for (let step = 1; step < TOTAL_EXPRESSIONS; step++) {
+    for (let step = 1; step < 10; step++) {
       await page.getByRole("button", { name: "Próximo" }).click();
       await expect(
         page.getByText(`${step + 1} de ${TOTAL_EXPRESSIONS}`),
@@ -46,11 +49,23 @@ test.describe("home", () => {
       seen.push(await title.innerText());
     }
 
-    expect(new Set(seen).size).toBe(TOTAL_EXPRESSIONS);
+    expect(new Set(seen).size).toBe(10);
+  });
+
+  test("Próximo wraps from the last expression to the first", async ({
+    page,
+  }) => {
+    await open(page, `/?expression=${LAST_EXPRESSION.id}`);
+    await expect(
+      page.getByText(`${TOTAL_EXPRESSIONS} de ${TOTAL_EXPRESSIONS}`),
+    ).toBeVisible();
 
     await page.getByRole("button", { name: "Próximo" }).click();
+
     await expect(page.getByText(`1 de ${TOTAL_EXPRESSIONS}`)).toBeVisible();
-    await expect(title).toHaveText("Dar com os burros n'água");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+      FIRST_EXPRESSION.text,
+    );
   });
 
   test("progress bar follows the current expression", async ({ page }) => {
@@ -87,7 +102,7 @@ test.describe("home", () => {
   test("Próximo continues from the expression opened by the URL", async ({
     page,
   }) => {
-    await open(page, "/?expression=judas-botas");
+    await open(page, `/?expression=${LAST_EXPRESSION.id}`);
 
     await page.getByRole("button", { name: "Próximo" }).click();
 
@@ -119,9 +134,9 @@ test.describe("home: last expression", () => {
     await open(page, "/");
     await next(page).click();
 
-    await page.getByRole("link", { name: "Todas" }).click();
+    await page.getByRole("link", { name: "Todas", exact: true }).click();
     await expect(page).toHaveURL(/\/expressions$/);
-    await page.getByRole("link", { name: "Início" }).click();
+    await page.getByRole("link", { name: "Início", exact: true }).click();
 
     await expect(title(page)).toHaveText("Boi de piranha");
   });

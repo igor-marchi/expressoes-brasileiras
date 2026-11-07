@@ -1,6 +1,10 @@
 import type { Page } from "@playwright/test";
 
-export const TOTAL_EXPRESSIONS = 8;
+import { expressions } from "../src/data/expressions";
+
+export const TOTAL_EXPRESSIONS = expressions.length;
+export const FIRST_EXPRESSION = expressions[0];
+export const LAST_EXPRESSION = expressions[expressions.length - 1];
 
 /**
  * Navigates and waits for React to hydrate, so clicks are not lost
