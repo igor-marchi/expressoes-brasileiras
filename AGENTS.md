@@ -32,7 +32,7 @@ Se o pedido pedir mudança de interface, faça o passo 1 antes de editar qualque
 - O cursor dos botões já vem do [CSS global](src/app/globals.css#L136). Não repita nos componentes.
 - O `E2E=1` do [playwright.config.ts](playwright.config.ts#L36) esconde o indicador do Next dev ([next.config.ts](next.config.ts#L5)), que cobria botões no mobile.
 - Ao mexer em tela ou comportamento, atualize o design (ver acima) e os testes em `e2e/`. Antes de concluir, rode `pnpm format`, `pnpm lint`, `pnpm exec tsc --noEmit` e `pnpm test:e2e`.
-- Commits: sempre no padrão [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/) (ex.: `feat: adicionar página de favoritas`, `fix: corrigir cursor dos botões`). Só commite quando o usuário pedir.
+- Commits: sempre no padrão [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/) (ex.: `feat: adicionar página de favoritas`, `fix: corrigir cursor dos botões`). Neste projeto, ao concluir uma alteração, faça sempre o commit e o push para o `origin/main`, sem esperar novo pedido (autorização do dono do repositório). Isso vale só para este repositório e só para commit e push em `main`.
 - Formatação: Prettier, configurado em [.prettierrc.json](.prettierrc.json). Ele ordena as classes do Tailwind.
 
 <!-- BEGIN:nextjs-agent-rules -->
