@@ -40,26 +40,25 @@ export function ListPagination({
   return (
     <nav
       aria-label="Paginação"
-      className="flex flex-col gap-4 border-t border-border pt-5 md:flex-row md:items-center md:justify-between md:pt-6"
+      className="flex flex-col gap-1.5 border-t border-border pt-5 md:flex-row md:items-center md:justify-between md:gap-4 md:pt-6"
     >
       <p className="text-center text-[15px] text-muted-foreground md:text-left">
         Mostrando {from} a {to} de {total}
       </p>
-      <div className="flex items-center justify-between gap-3 md:justify-end md:gap-2">
+      <p className="mb-2.5 text-center text-base font-semibold md:hidden">
+        Página {page} de {totalPages}
+      </p>
+      <div className="flex gap-3 md:items-center md:justify-end md:gap-2">
         <Button
           variant="outline"
           disabled={page <= 1}
           onClick={() => onChange(page - 1)}
           aria-label="Página anterior"
-          className="h-12 gap-2 rounded-full border-input bg-card px-[18px] text-base font-semibold hover:bg-secondary md:h-11"
+          className="h-[52px] min-w-0 flex-1 gap-2 rounded-full border-input bg-card text-base font-semibold hover:bg-secondary md:h-11 md:flex-none md:px-[18px]"
         >
           <ArrowLeft className="size-[18px]" />
           Anterior
         </Button>
-
-        <span className="text-[15px] font-semibold whitespace-nowrap md:hidden">
-          Página {page} de {totalPages}
-        </span>
 
         <div className="hidden items-center gap-2 md:flex">
           {visiblePages(page, totalPages).map((item, index) =>
@@ -95,7 +94,7 @@ export function ListPagination({
           disabled={page >= totalPages}
           onClick={() => onChange(page + 1)}
           aria-label="Próxima página"
-          className="h-12 gap-2 rounded-full px-[18px] text-base font-semibold md:h-11"
+          className="h-[52px] min-w-0 flex-1 gap-2 rounded-full text-base font-semibold md:h-11 md:flex-none md:px-[18px]"
         >
           Próxima
           <ArrowRight className="size-[18px]" />

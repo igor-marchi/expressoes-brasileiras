@@ -30,7 +30,7 @@
       "x": 0,
       "y": 940,
       "w": 1280,
-      "h": 2300,
+      "h": 1300,
       "title": "Todas as expressões",
       "expand": "fill"
     },
@@ -45,7 +45,7 @@
     },
     "FavoritasVazio.dc.html": {
       "x": 0,
-      "y": 3340,
+      "y": 2320,
       "w": 1280,
       "h": 700,
       "title": "Favoritas (vazio)",
@@ -55,7 +55,7 @@
       "x": 2720,
       "y": 940,
       "w": 390,
-      "h": 3600,
+      "h": 1500,
       "title": "Todas as expressões (celular)"
     }
   },

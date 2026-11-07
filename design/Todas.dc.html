@@ -14,7 +14,7 @@ body{margin:0;font-family:'Instrument Sans',system-ui,sans-serif;color:#14231B;b
 a{color:#14231B;text-decoration:none}a:hover{color:#0F6B43}
 </style>
 </helmet>
-<div style="min-height: 2300px; background: #F4F6F1; display: flex; flex-direction: column; box-sizing: border-box">
+<div style="min-height: 1300px; background: #F4F6F1; display: flex; flex-direction: column; box-sizing: border-box">
 
 <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 64px; border-bottom: 1px solid #D9E0D6">
 <div style="display: flex; align-items: center; gap: 12px">
@@ -45,7 +45,7 @@ a{color:#14231B;text-decoration:none}a:hover{color:#0F6B43}
 </div>
 
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
-<sc-for list="{{cards}}" as="c" hint-placeholder-count="20">
+<sc-for list="{{cards}}" as="c" hint-placeholder-count="10">
 <div style="position: relative; display: flex; flex-direction: column">
 <a href="Main.dc.html" style="background: #FFFFFF; border: 1px solid #D9E0D6; border-radius: 8px; padding: 24px 68px 24px 28px; flex: 1; display: flex; flex-direction: column; gap: 8px">
 <span style="font-size: 13px; color: #0F6B43; font-weight: 600; letter-spacing: 0.08em">{{c.position}}</span>
@@ -58,7 +58,7 @@ a{color:#14231B;text-decoration:none}a:hover{color:#0F6B43}
 </div>
 
 <nav aria-label="Paginação" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid #D9E0D6; padding-top: 24px">
-<p style="margin: 0; font-size: 15px; color: #4F5F56">Mostrando 1 a 20 de 522</p>
+<p style="margin: 0; font-size: 15px; color: #4F5F56">Mostrando 1 a 10 de 522</p>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
 <button disabled aria-label="Página anterior" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; background: #FFFFFF; color: #14231B; border: 1px solid #C3CDC0; border-radius: 999px; font-family: inherit; font-size: 16px; font-weight: 600; opacity: 0.4; cursor: not-allowed">
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#14231B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
@@ -77,12 +77,12 @@ Próxima
 </main>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":2300}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1300}}'>
 class Component extends DCLogic {
   renderVals() {
     const sample = [{"text":"Dar com os burros n'água","meaning":"Fracassar, ver um plano dar errado."},{"text":"Boi de piranha","meaning":"Pessoa sacrificada para que os outros passem em segurança ou escapem de um problema."},{"text":"Tirar o cavalinho da chuva","meaning":"Desistir de uma ideia ou de uma expectativa."},{"text":"Pé na jaca","meaning":"Exagerar, sobretudo em comida, bebida ou festa."},{"text":"Rodar a baiana","meaning":"Fazer escândalo, perder a compostura em público."},{"text":"Ficar a ver navios","meaning":"Ficar esperando algo que não vai chegar, ou perder uma oportunidade."},{"text":"Maria vai com as outras","meaning":"Pessoa sem opinião própria, que faz o que a maioria faz."},{"text":"Onde Judas perdeu as botas","meaning":"Lugar muito distante, de difícil acesso."},{"text":"Quebrar o galho","meaning":"Resolver um problema de forma improvisada ou ajudar alguém num aperto."},{"text":"Dar o braço a torcer","meaning":"Admitir que estava errado e ceder diante de outra opinião."},{"text":"Chutar o balde","meaning":"Desistir de tudo, perder a paciência e jogar o esforço fora."},{"text":"Engolir sapo","meaning":"Aguentar uma situação desagradável sem poder reclamar."},{"text":"Matar dois coelhos com uma cajadada só","meaning":"Resolver dois problemas de uma vez, com uma única ação."},{"text":"Água mole em pedra dura, tanto bate até que fura","meaning":"Com persistência, até o que parece impossível acaba cedendo."},{"text":"Pagar o pato","meaning":"Ser punido ou arcar com a culpa de algo que não fez."},{"text":"Cada macaco no seu galho","meaning":"Cada pessoa deve cuidar do que é da sua área e não se meter no resto."},{"text":"Estar com a faca e o queijo na mão","meaning":"Ter tudo o que precisa para conseguir o que quer."},{"text":"Pisar na bola","meaning":"Errar ou falhar com alguém, geralmente por descuido."},{"text":"Fazer vista grossa","meaning":"Fingir que não viu algo errado para evitar problema."},{"text":"Ficar de queixo caído","meaning":"Ficar muito surpreso ou impressionado."}];
     const favs = { 0: true, 3: true, 5: true };
-    const cards = sample.map((e, i) => ({
+    const cards = sample.slice(0, 10).map((e, i) => ({
       position: (i + 1) + " DE 522",
       text: e.text,
       meaning: e.meaning,
@@ -101,7 +101,7 @@ class Component extends DCLogic {
       { label: "3", style: idle, current: "false" },
       { label: "4", style: idle, current: "false" },
       { label: "…", style: gap, current: "false" },
-      { label: "27", style: idle, current: "false" }
+      { label: "53", style: idle, current: "false" }
     ];
     return { cards, pages };
   }

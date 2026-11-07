@@ -7,8 +7,10 @@ import { Search } from "lucide-react";
 import { ExpressionCardLink } from "@/components/expression-card-link";
 import { ListPagination } from "@/components/list-pagination";
 import { expressions } from "@/data/expressions";
+import { useIsMobile } from "@/hooks/use-is-mobile";
 
-const PAGE_SIZE = 20;
+const DESKTOP_PAGE_SIZE = 10;
+const MOBILE_PAGE_SIZE = 5;
 
 function normalize(value: string) {
   return value.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
@@ -36,6 +38,7 @@ function updateUrl(query: string, page: number, mode: "push" | "replace") {
 
 export function ExpressionList() {
   const initial = useSearchParams();
+  const pageSize = useIsMobile() ? MOBILE_PAGE_SIZE : DESKTOP_PAGE_SIZE;
   const [query, setQuery] = useState(initial.get("q") ?? "");
   const [requestedPage, setRequestedPage] = useState(
     parsePage(initial.get("page")),
@@ -63,10 +66,10 @@ export function ExpressionList() {
         normalize(expression.meaning).includes(term),
     );
 
-  const totalPages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+  const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
   const page = Math.min(requestedPage, totalPages);
-  const start = (page - 1) * PAGE_SIZE;
-  const pageItems = items.slice(start, start + PAGE_SIZE);
+  const start = (page - 1) * pageSize;
+  const pageItems = items.slice(start, start + pageSize);
 
   function handleSearch(value: string) {
     setQuery(value);
