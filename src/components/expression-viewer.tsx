@@ -87,16 +87,18 @@ export function ExpressionViewer({
 
       <footer className="sticky bottom-0 border-t border-border bg-background px-5 pt-4 pb-7 md:static md:mx-auto md:w-full md:max-w-6xl md:border-t-0 md:px-16 md:pt-0 md:pb-14">
         <div className="flex flex-wrap items-center justify-between gap-6 md:border-t md:border-border md:pt-8">
-          <div className="hidden items-center gap-2 md:flex" aria-hidden="true">
-            {expressions.map((item, dotIndex) => (
-              <span
-                key={item.id}
-                className={cn(
-                  "h-2 rounded-full",
-                  dotIndex === index ? "w-7 bg-primary" : "w-2 bg-input",
-                )}
-              />
-            ))}
+          <div
+            role="progressbar"
+            aria-label="Progresso"
+            aria-valuemin={1}
+            aria-valuemax={expressions.length}
+            aria-valuenow={index + 1}
+            className="hidden h-2 w-64 overflow-hidden rounded-full bg-input md:block"
+          >
+            <div
+              className="h-full rounded-full bg-primary"
+              style={{ width: `${((index + 1) / expressions.length) * 100}%` }}
+            />
           </div>
           <div className="flex w-full gap-3 md:w-auto">
             <Button

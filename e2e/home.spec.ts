@@ -53,17 +53,16 @@ test.describe("home", () => {
     await expect(title).toHaveText("Dar com os burros n'água");
   });
 
-  test("progress dots follow the current expression", async ({ page }) => {
+  test("progress bar follows the current expression", async ({ page }) => {
     await open(page, "/");
-    const dots = page.locator("footer [aria-hidden='true'] > span");
+    const bar = page.getByRole("progressbar", { name: "Progresso" });
 
-    await expect(dots).toHaveCount(TOTAL_EXPRESSIONS);
-    await expect(dots.nth(0)).toHaveClass(/bg-primary/);
+    await expect(bar).toHaveAttribute("aria-valuemax", `${TOTAL_EXPRESSIONS}`);
+    await expect(bar).toHaveAttribute("aria-valuenow", "1");
 
     await page.getByRole("button", { name: "Próximo" }).click();
 
-    await expect(dots.nth(0)).toHaveClass(/bg-input/);
-    await expect(dots.nth(1)).toHaveClass(/bg-primary/);
+    await expect(bar).toHaveAttribute("aria-valuenow", "2");
   });
 
   test("?expression= opens that expression", async ({ page }) => {
