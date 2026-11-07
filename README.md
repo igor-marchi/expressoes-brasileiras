@@ -5,12 +5,12 @@ App que mostra expressões populares brasileiras, uma por vez: significado, orig
 ## Telas
 
 - **Início** (`/`): uma expressão por vez, com o botão "Próximo". Abre uma expressão específica com `/?expression=<id>`.
-- **Todas** (`/expressions`): lista com busca por texto ou significado e filtro por tipo (expressões e locuções). O filtro também vale para a tela inicial e fica salvo no navegador.
+- **Todas** (`/expressions`): lista com busca por texto ou significado e filtro por tipo (expressões, locuções e gírias). O filtro também vale para a tela inicial e fica salvo no navegador.
 - **Favoritas** (`/favorites`): as expressões marcadas com a estrela.
 
 ## Tecnologias
 
-Next.js, React, Tailwind CSS e shadcn/ui. Não tem backend nem banco de dados: as expressões e as locuções substantivas ficam em [src/data](src/data) e as favoritas no `localStorage`. As versões estão no [package.json](package.json).
+Next.js, React, Tailwind CSS e shadcn/ui. Não tem backend nem banco de dados: as expressões, as locuções substantivas e as gírias ficam em [src/data](src/data) e as favoritas no `localStorage`. As versões estão no [package.json](package.json).
 
 ## Como rodar
 

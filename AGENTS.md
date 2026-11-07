@@ -7,9 +7,9 @@ App em Next.js que mostra expressões populares brasileiras, uma por vez, com bo
 - Comandos (dev, build, lint, e2e): [scripts do package.json](package.json#L6-L15). Use sempre `pnpm`.
 - Stack e versões: [package.json](package.json). Sem backend nem banco.
 - Rotas: [src/app/](src/app). A home aceita `?expression=<id>` ([page.tsx](src/app/page.tsx)).
-- Dados: [expressions.ts](src/data/expressions.ts) (expressões) e [noun-phrases.ts](src/data/noun-phrases.ts) (locuções substantivas), cada lista na sua ordem de fama. [entries.ts](src/data/entries.ts) junta as duas alternando uma de cada (expressão, locução, expressão…) e, quando uma acaba, segue com a outra. As listas não dependem uma da outra. Tipos em [entry.ts](src/data/entry.ts).
+- Dados: [expressions.ts](src/data/expressions.ts) (expressões), [noun-phrases.ts](src/data/noun-phrases.ts) (locuções substantivas) e [slang.ts](src/data/slang.ts) (gírias), cada lista na sua ordem de fama. [entries.ts](src/data/entries.ts) junta as três alternando uma de cada (expressão, locução, gíria, expressão…) e, quando uma acaba, segue com as outras. As listas não dependem uma da outra. Tipos em [entry.ts](src/data/entry.ts).
 - Favoritas: [use-favorites.ts](src/hooks/use-favorites.ts).
-- Filtro de tipo (lista e tela de expressão, guardado no navegador): [use-kind-filter.ts](src/hooks/use-kind-filter.ts) e [kind-filter.tsx](src/components/kind-filter.tsx).
+- Filtro de tipo (lista e tela de expressão; guarda no navegador só os tipos ocultos, para um tipo novo já vir ligado): [use-kind-filter.ts](src/hooks/use-kind-filter.ts) e [kind-filter.tsx](src/components/kind-filter.tsx).
 - Tokens de cor, fonte e raio: [globals.css](src/app/globals.css#L51).
 - Testes e2e: [e2e/](e2e) e [playwright.config.ts](playwright.config.ts).
 - Design (artefato das telas): [design/](design). O mapa de telas para código está em [design/README.md](design/README.md).
@@ -24,6 +24,16 @@ Toda alteração que mexe na interface (layout, cores, textos de tela, component
 4. Commite design e código juntos.
 
 Se o pedido pedir mudança de interface, faça o passo 1 antes de editar qualquer arquivo em `src/`. Se encontrar código e design diferentes, avise o usuário e corrija os dois para o mesmo estado, sem deixar um deles desatualizado.
+
+## Conteúdo das descrições
+
+Vale para todo texto de expressão, locução e gíria em [src/data](src/data):
+
+- Sem ruído. Explique a origem direto, sem avisar de onde ela vem nem o quanto é certa. Nada de "a origem não é documentada", "a origem não é certa", "segundo a versão mais comum", "diz-se que" ou "conta-se que".
+- Sem aviso de sensibilidade, de polêmica nem de uso. Explique a origem como ela é, mesmo em expressões sensíveis.
+- Só informação que a pesquisa sustenta. Não invente detalhe para preencher um campo.
+- Cada campo diz uma coisa só: `meaning` o sentido, `origin` de onde vem, `why` por que a imagem faz sentido, `example` uma frase de uso.
+- Frases curtas, em pt-BR, no indicativo.
 
 ## Convenções
 
