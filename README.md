@@ -1,30 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Expressões do Brasil
 
-## Getting Started
+App que mostra expressões populares brasileiras, uma por vez: significado, origem, por que se diz assim e um exemplo de uso. Um botão "Próximo" passa para a seguinte, e as expressões favoritas ficam salvas no navegador.
 
-First, run the development server:
+## Telas
+
+- **Início** (`/`): uma expressão por vez, com o botão "Próximo". Abre uma expressão específica com `/?expression=<id>`.
+- **Todas** (`/expressions`): lista com busca por texto ou significado.
+- **Favoritas** (`/favorites`): as expressões marcadas com a estrela.
+
+## Tecnologias
+
+Next.js, React, Tailwind CSS e shadcn/ui. Não tem backend nem banco de dados: as expressões ficam em [src/data/expressions.ts](src/data/expressions.ts) e as favoritas no `localStorage`. As versões estão no [package.json](package.json).
+
+## Como rodar
+
+Use [pnpm](https://pnpm.io).
 
 ```bash
+pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Os comandos estão em [package.json](package.json#L6-L15). Os principais:
 
-## Learn More
+- `pnpm dev`: servidor de desenvolvimento.
+- `pnpm build`: build de produção.
+- `pnpm lint`: ESLint.
+- `pnpm format`: formata o código com Prettier.
+- `pnpm test:e2e`: testes de ponta a ponta com Playwright.
 
-To learn more about Next.js, take a look at the following resources:
+## Testes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Os testes e2e ficam em [e2e/](e2e) e cobrem desktop e celular. O Playwright sobe o app sozinho na porta 3100. Localmente ele usa o Chrome instalado; no CI, rode antes `pnpm exec playwright install`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pnpm test:e2e       # roda tudo
+pnpm test:e2e:ui    # abre o modo interativo
+```
 
-## Deploy on Vercel
+## Para quem contribui
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+As convenções do projeto (idioma, tokens de design, commits) estão no [AGENTS.md](AGENTS.md).
