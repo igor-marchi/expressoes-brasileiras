@@ -9,7 +9,10 @@ import {
   Star,
 } from "lucide-react";
 
-import { ExpressionContent } from "@/components/expression-content";
+import {
+  ExpressionContent,
+  ExpressionCounter,
+} from "@/components/expression-content";
 import { ExpressionSwiper } from "@/components/expression-swiper";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -106,6 +109,9 @@ export function ExpressionViewer({
   if (isMobile) {
     return (
       <main className="flex min-h-0 flex-1 flex-col">
+        <div className="mx-auto w-full max-w-6xl px-5 pt-6">
+          <ExpressionCounter index={index} />
+        </div>
         <ExpressionSwiper index={index} onChange={setSelected} />
 
         <footer className="sticky bottom-0 z-10 flex flex-col gap-3.5 border-t border-border bg-background px-5 pt-3 pb-7">

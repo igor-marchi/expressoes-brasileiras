@@ -8,6 +8,7 @@ import {
   MOBILE_PAGE_SIZE,
   MOBILE_TOTAL_PAGES,
   swipe,
+  TOTAL_EXPRESSIONS,
 } from "./helpers";
 
 test.describe("mobile", () => {
@@ -225,5 +226,33 @@ test.describe("mobile", () => {
     });
 
     expect(extra).toBeLessThan(200);
+  });
+
+  test("the counter stays fixed while only the content slides", async ({
+    page,
+  }) => {
+    await open(page, "/");
+    const counter = page.getByText(`1 de ${TOTAL_EXPRESSIONS}`, {
+      exact: true,
+    });
+    const title = page.getByRole("heading", { level: 1 });
+    await expect(title).toBeVisible();
+    const counterBefore = await counter.boundingBox();
+    const titleBefore = await title.boundingBox();
+    const swiper = await page.getByTestId("swiper").boundingBox();
+    const y = swiper!.y + swiper!.height / 2;
+    const x = swiper!.x + swiper!.width / 2;
+
+    await page.mouse.move(x, y);
+    await page.mouse.down();
+    await page.mouse.move(x - 120, y, { steps: 8 });
+
+    expect((await counter.boundingBox())!.x).toBe(counterBefore!.x);
+    expect((await title.boundingBox())!.x).toBeLessThan(titleBefore!.x - 50);
+
+    await page.mouse.up();
+    await expect(
+      page.getByText(`2 de ${TOTAL_EXPRESSIONS}`, { exact: true }),
+    ).toBeVisible();
   });
 });

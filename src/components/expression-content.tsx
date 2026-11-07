@@ -7,25 +7,38 @@ const sectionClass =
   "flex flex-col gap-1.5 px-5 py-[18px] md:gap-2 md:px-8 md:py-7";
 const bodyClass = "text-[15px] leading-normal md:text-[17px] md:leading-[1.55]";
 
+export function ExpressionCounter({ index }: { index: number }) {
+  return (
+    <div className="flex items-center gap-2.5 md:gap-3">
+      <span className="rounded-full bg-accent px-2.5 py-[5px] text-[13px] font-semibold text-accent-foreground md:px-3 md:py-1.5 md:text-sm">
+        {index + 1} de {expressions.length}
+      </span>
+      <span className="text-xs font-semibold tracking-[0.08em] text-muted-foreground uppercase md:text-sm">
+        Expressão popular
+      </span>
+    </div>
+  );
+}
+
 export function ExpressionContent({
   expression,
   index,
+  showCounter = true,
 }: {
   expression: Expression;
   index: number;
+  showCounter?: boolean;
 }) {
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center gap-6 px-5 py-6 md:px-16 md:py-14">
+    <div
+      className={cn(
+        "mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center gap-6 px-5 py-6 md:px-16 md:py-14",
+        !showCounter && "pt-5",
+      )}
+    >
       <div className="grid items-start gap-6 lg:grid-cols-2 lg:gap-12">
         <div className="flex min-w-0 flex-col gap-5 md:gap-6">
-          <div className="flex items-center gap-2.5 md:gap-3">
-            <span className="rounded-full bg-accent px-2.5 py-[5px] text-[13px] font-semibold text-accent-foreground md:px-3 md:py-1.5 md:text-sm">
-              {index + 1} de {expressions.length}
-            </span>
-            <span className="text-xs font-semibold tracking-[0.08em] text-muted-foreground uppercase md:text-sm">
-              Expressão popular
-            </span>
-          </div>
+          {showCounter && <ExpressionCounter index={index} />}
           <h1 className="font-heading text-[42px] leading-[1.05] font-extrabold tracking-tight text-balance md:text-[68px] md:leading-[1.02]">
             {expression.text}
           </h1>

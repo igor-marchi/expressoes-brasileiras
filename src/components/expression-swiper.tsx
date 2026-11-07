@@ -116,17 +116,26 @@ export function ExpressionSwiper({
           <ExpressionContent
             expression={expressions[previous]}
             index={previous}
+            showCounter={false}
           />
         </div>
         <div className="flex flex-1 flex-col">
-          <ExpressionContent expression={expressions[index]} index={index} />
+          <ExpressionContent
+            expression={expressions[index]}
+            index={index}
+            showCounter={false}
+          />
         </div>
         <div
           className="absolute inset-y-0 left-full flex w-full flex-col"
           aria-hidden
           inert
         >
-          <ExpressionContent expression={expressions[next]} index={next} />
+          <ExpressionContent
+            expression={expressions[next]}
+            index={next}
+            showCounter={false}
+          />
         </div>
       </div>
     </div>
