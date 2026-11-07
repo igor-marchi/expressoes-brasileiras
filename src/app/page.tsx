@@ -12,7 +12,7 @@ async function SelectedExpression({
   const id = typeof expression === "string" ? expression : undefined;
   const found = expressions.findIndex((item) => item.id === id);
 
-  return <ExpressionViewer key={id} initialIndex={found >= 0 ? found : 0} />;
+  return <ExpressionViewer key={id} initialIndex={found >= 0 ? found : null} />;
 }
 
 export default function Home({ searchParams }: PageProps<"/">) {

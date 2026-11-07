@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
 import { open, TOTAL_EXPRESSIONS } from "./helpers";
 
@@ -95,5 +95,87 @@ test.describe("home", () => {
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
       "Dar com os burros n'água",
     );
+  });
+});
+
+test.describe("home: last expression", () => {
+  const title = (page: Page) => page.getByRole("heading", { level: 1 });
+  const next = (page: Page) => page.getByRole("button", { name: "Próximo" });
+
+  test("reopening the site shows the last expression seen", async ({
+    page,
+  }) => {
+    await open(page, "/");
+    await next(page).click();
+    await next(page).click();
+    await expect(title(page)).toHaveText("Tirar o cavalinho da chuva");
+
+    await open(page, "/");
+
+    await expect(title(page)).toHaveText("Tirar o cavalinho da chuva");
+    await expect(page.getByText(`3 de ${TOTAL_EXPRESSIONS}`)).toBeVisible();
+  });
+
+  test("coming back from another page keeps the position", async ({ page }) => {
+    await open(page, "/");
+    await next(page).click();
+
+    await page.getByRole("link", { name: "Todas" }).click();
+    await expect(page).toHaveURL(/\/expressions$/);
+    await page.getByRole("link", { name: "Início" }).click();
+
+    await expect(title(page)).toHaveText("Boi de piranha");
+  });
+
+  test("keeps going from where it stopped after a reload", async ({ page }) => {
+    await open(page, "/");
+    await next(page).click();
+    await open(page, "/");
+
+    await next(page).click();
+
+    await expect(title(page)).toHaveText("Tirar o cavalinho da chuva");
+  });
+
+  test("?expression= wins over the saved one and becomes the new saved", async ({
+    page,
+  }) => {
+    await open(page, "/");
+    await next(page).click();
+
+    await open(page, "/?expression=pe-na-jaca");
+    await expect(title(page)).toHaveText("Pé na jaca");
+
+    await open(page, "/");
+    await expect(title(page)).toHaveText("Pé na jaca");
+  });
+
+  test("a saved id that no longer exists falls back to the first", async ({
+    page,
+  }) => {
+    await open(page, "/");
+    await page.evaluate(() =>
+      localStorage.setItem("last-expression", "does-not-exist"),
+    );
+
+    await open(page, "/");
+
+    await expect(title(page)).toHaveText("Dar com os burros n'água");
+  });
+
+  test("works when storage is unavailable", async ({ page }) => {
+    await page.addInitScript(() => {
+      Storage.prototype.getItem = () => {
+        throw new Error("blocked");
+      };
+      Storage.prototype.setItem = () => {
+        throw new Error("blocked");
+      };
+    });
+    await open(page, "/");
+
+    await next(page).click();
+
+    await expect(title(page)).toHaveText("Boi de piranha");
   });
 });

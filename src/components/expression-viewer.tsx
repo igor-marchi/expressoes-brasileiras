@@ -1,12 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowRight, Star } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { expressions } from "@/data/expressions";
 import { useFavorites } from "@/hooks/use-favorites";
+import {
+  saveLastExpression,
+  useLastExpression,
+} from "@/hooks/use-last-expression";
 
 const labelClass =
   "text-xs font-semibold uppercase tracking-[0.1em] text-primary md:text-[13px]";
@@ -14,14 +18,33 @@ const sectionClass =
   "flex flex-col gap-1.5 px-5 py-[18px] md:gap-2 md:px-8 md:py-7";
 const bodyClass = "text-[15px] leading-normal md:text-[17px] md:leading-[1.55]";
 
-export function ExpressionViewer({ initialIndex }: { initialIndex: number }) {
-  const [index, setIndex] = useState(initialIndex);
-  const expression = expressions[index];
+export function ExpressionViewer({
+  initialIndex,
+}: {
+  initialIndex: number | null;
+}) {
+  const [selected, setSelected] = useState(initialIndex);
+  const lastId = useLastExpression();
   const { isFavorite, toggle } = useFavorites();
+
+  const lastIndex = expressions.findIndex((item) => item.id === lastId);
+  const index = selected ?? Math.max(lastIndex, 0);
+  const expression = expressions[index];
   const favorite = isFavorite(expression.id);
+  const ready = selected !== null || lastId !== undefined;
+
+  useEffect(() => {
+    if (ready) {
+      saveLastExpression(expression.id);
+    }
+  }, [ready, expression.id]);
 
   function handleNext() {
-    setIndex((current) => (current + 1) % expressions.length);
+    setSelected((index + 1) % expressions.length);
+  }
+
+  if (!ready) {
+    return <main className="flex-1" />;
   }
 
   return (
