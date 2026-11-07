@@ -70,7 +70,11 @@ button{font-family:inherit}
 <svg width="22" height="22" viewBox="0 0 24 24" fill="{{starFill}}" stroke="#0F6B43" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
 {{favLabel}}
 </button>
-<button onClick="{{next}}" style="display: inline-flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 28px; background: #0F6B43; color: #FFFFFF; border: 0; border-radius: 999px; font-size: 18px; font-weight: 600; cursor: pointer">
+<button onClick="{{prev}}" aria-keyshortcuts="ArrowLeft" style="display: inline-flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 28px; background: #FFFFFF; color: #14231B; border: 1px solid #C3CDC0; border-radius: 999px; font-size: 18px; font-weight: 600; cursor: pointer">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14231B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+Anterior
+</button>
+<button onClick="{{next}}" aria-keyshortcuts="ArrowRight" style="display: inline-flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 28px; background: #0F6B43; color: #FFFFFF; border: 0; border-radius: 999px; font-size: 18px; font-weight: 600; cursor: pointer">
 Próximo
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
 </button>
@@ -103,6 +107,7 @@ class Component extends DCLogic {
       pressed: this.state.favs[this.state.i] ? "true" : "false",
       favLabel: this.state.favs[this.state.i] ? "Favoritada" : "Favoritar",
       toggleFav: () => this.setState({ favs: { ...this.state.favs, [this.state.i]: !this.state.favs[this.state.i] } }),
+      prev: () => this.setState({ i: (this.state.i + n - 1) % n }),
       next: () => this.setState({ i: (this.state.i + 1) % n })
     };
   }

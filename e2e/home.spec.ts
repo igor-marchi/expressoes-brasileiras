@@ -68,6 +68,85 @@ test.describe("home", () => {
     );
   });
 
+  test("Anterior shows the previous expression", async ({ page }) => {
+    await open(page, "/?expression=boi-de-piranha");
+
+    await page.getByRole("button", { name: "Anterior" }).click();
+
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+      FIRST_EXPRESSION.text,
+    );
+    await expect(
+      page.getByText(`1 de ${TOTAL_EXPRESSIONS}`, { exact: true }),
+    ).toBeVisible();
+  });
+
+  test("Anterior wraps from the first expression to the last", async ({
+    page,
+  }) => {
+    await open(page, "/");
+
+    await page.getByRole("button", { name: "Anterior" }).click();
+
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+      LAST_EXPRESSION.text,
+    );
+    await expect(
+      page.getByText(`${TOTAL_EXPRESSIONS} de ${TOTAL_EXPRESSIONS}`),
+    ).toBeVisible();
+  });
+
+  test("the right arrow key shows the next expression", async ({ page }) => {
+    await open(page, "/");
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+
+    await page.keyboard.press("ArrowRight");
+
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+      "Boi de piranha",
+    );
+  });
+
+  test("the left arrow key shows the previous expression", async ({ page }) => {
+    await open(page, "/?expression=boi-de-piranha");
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+
+    await page.keyboard.press("ArrowLeft");
+
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+      FIRST_EXPRESSION.text,
+    );
+  });
+
+  test("the arrow keys wrap around at both ends", async ({ page }) => {
+    await open(page, "/");
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+
+    await page.keyboard.press("ArrowLeft");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+      LAST_EXPRESSION.text,
+    );
+
+    await page.keyboard.press("ArrowRight");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+      FIRST_EXPRESSION.text,
+    );
+  });
+
+  test("arrow keys with a modifier are left to the browser", async ({
+    page,
+  }) => {
+    await open(page, "/");
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+
+    await page.keyboard.press("Alt+ArrowLeft");
+    await page.keyboard.press("Shift+ArrowRight");
+
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+      FIRST_EXPRESSION.text,
+    );
+  });
+
   test("progress bar follows the current expression", async ({ page }) => {
     await open(page, "/");
     const bar = page.getByRole("progressbar", { name: "Progresso" });
