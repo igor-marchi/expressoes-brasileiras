@@ -1,26 +1,147 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-instrument-sans);
   --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-bricolage);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* Light theme: green and yellow */
+  --background: #f4f6f1;
+  --foreground: #14231b;
+  --card: #ffffff;
+  --card-foreground: #14231b;
+  --popover: #ffffff;
+  --popover-foreground: #14231b;
+  --primary: #0f6b43;
+  --primary-foreground: #ffffff;
+  --secondary: #e8ede4;
+  --secondary-foreground: #14231b;
+  --muted: #e8ede4;
+  --muted-foreground: #4f5f56;
+  --accent: #f5c518;
+  --accent-foreground: #14231b;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #d9e0d6;
+  --input: #c3cdc0;
+  --ring: #0f6b43;
+  --chart-1: #0f6b43;
+  --chart-2: #f5c518;
+  --chart-3: #4f5f56;
+  --chart-4: #7fb08f;
+  --chart-5: #14231b;
+  --radius: 0.5rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #14231b;
+  --sidebar-primary: #0f6b43;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e8ede4;
+  --sidebar-accent-foreground: #14231b;
+  --sidebar-border: #d9e0d6;
+  --sidebar-ring: #0f6b43;
+}
+
+.dark {
+  /* Dark theme: black and purple */
+  --background: #0b0912;
+  --foreground: #f2eefa;
+  --card: #15111f;
+  --card-foreground: #f2eefa;
+  --popover: #15111f;
+  --popover-foreground: #f2eefa;
+  --primary: #7c3aed;
+  --primary-foreground: #ffffff;
+  --secondary: #2a2340;
+  --secondary-foreground: #f2eefa;
+  --muted: #2a2340;
+  --muted-foreground: #a79fc0;
+  --accent: #a78bfa;
+  --accent-foreground: #0b0912;
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: #2a2340;
+  --input: #3a3057;
+  --ring: #a78bfa;
+  --chart-1: #7c3aed;
+  --chart-2: #a78bfa;
+  --chart-3: #e9ddff;
+  --chart-4: #4c2a9a;
+  --chart-5: #a79fc0;
+  --sidebar: #15111f;
+  --sidebar-foreground: #f2eefa;
+  --sidebar-primary: #7c3aed;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #2a2340;
+  --sidebar-accent-foreground: #f2eefa;
+  --sidebar-border: #2a2340;
+  --sidebar-ring: #a78bfa;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  summary,
+  label[for] {
+    cursor: pointer;
+  }
+  button:disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-heading);
+  }
 }
