@@ -5,8 +5,9 @@ import { useMemo, useSyncExternalStore } from "react";
 import type { Entry, EntryKind } from "@/data/entry";
 import { entries } from "@/data/entries";
 
-const STORAGE_KEY = "kinds";
-const ALL_KINDS: EntryKind[] = ["expression", "noun-phrase"];
+/** Only the hidden types are stored, so a new type starts turned on. */
+const STORAGE_KEY = "hidden-kinds";
+const ALL_KINDS: EntryKind[] = ["expression", "noun-phrase", "slang"];
 
 let current: EntryKind[] | null = null;
 const listeners = new Set<() => void>();
@@ -16,7 +17,7 @@ function load(): EntryKind[] {
     const raw = localStorage.getItem(STORAGE_KEY);
     const parsed: unknown = raw ? JSON.parse(raw) : null;
     if (Array.isArray(parsed)) {
-      const kinds = ALL_KINDS.filter((kind) => parsed.includes(kind));
+      const kinds = ALL_KINDS.filter((kind) => !parsed.includes(kind));
       if (kinds.length > 0) return kinds;
     }
   } catch {
@@ -61,15 +62,20 @@ function subscribe(listener: () => void) {
 /** Turns a type on or off. The last active type cannot be turned off. */
 function toggle(kind: EntryKind) {
   const kinds = getSnapshot();
+  let next: EntryKind[];
   if (kinds.includes(kind)) {
     if (kinds.length === 1) return;
-    current = kinds.filter((item) => item !== kind);
+    next = kinds.filter((item) => item !== kind);
   } else {
-    current = ALL_KINDS.filter((item) => item === kind || kinds.includes(item));
+    next = ALL_KINDS.filter((item) => item === kind || kinds.includes(item));
   }
+  current = next;
 
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(current));
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(ALL_KINDS.filter((item) => !next.includes(item))),
+    );
   } catch {
     // Storage unavailable: the choice lasts only until the page reloads.
   }

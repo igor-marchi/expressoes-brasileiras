@@ -69,7 +69,7 @@ export const expressions: EntryData[] = [
     text: "Maria vai com as outras",
     meaning: "Pessoa sem opinião própria, que faz o que a maioria faz.",
     origin:
-      'Remete à rainha dona Maria I de Portugal, conhecida como "a Louca", que no fim da vida teria sido cercada por damas que a acompanhavam em tudo.',
+      'Remete à rainha dona Maria I de Portugal, conhecida como "a Louca", que no fim da vida foi cercada por damas que a acompanhavam em tudo.',
     why: "O nome Maria virou símbolo de quem simplesmente acompanha o grupo, sem decidir por conta própria.",
     example:
       "Não seja Maria vai com as outras: escolha o curso de que você gosta.",
@@ -79,7 +79,7 @@ export const expressions: EntryData[] = [
     text: "Onde Judas perdeu as botas",
     meaning: "Lugar muito distante, de difícil acesso.",
     origin:
-      "Judas, depois de trair Jesus, fugiu e se enforcou, e as botas teriam ficado num ponto perdido. Ou então foi lá que ele escondeu as moedas da traição, num lugar remoto.",
+      "Judas, depois de trair Jesus, fugiu e se enforcou, e as botas ficaram num ponto perdido. Foi lá que ele escondeu as moedas da traição, num lugar remoto.",
     why: "Como ninguém sabe onde fica esse lugar, a expressão serve para qualquer destino longe demais.",
     example: "Ele mora onde Judas perdeu as botas, são duas horas de viagem.",
   },
@@ -429,7 +429,7 @@ export const expressions: EntryData[] = [
     text: "Feito nas coxas",
     meaning: "Feito às pressas e sem capricho, com resultado malfeito.",
     origin:
-      "Vem do período da escravidão, quando pessoas escravizadas teriam moldado telhas de argila nas próprias coxas. Como cada corpo era diferente, as peças saíam irregulares e não se encaixavam bem.",
+      "Vem do período da escravidão, quando pessoas escravizadas moldaram telhas de argila nas próprias coxas. Como cada corpo era diferente, as peças saíam irregulares e não se encaixavam bem.",
     why: "A telha moldada na coxa varia de tamanho e formato, e a expressão passou a descrever qualquer trabalho irregular.",
     example: "O relatório ficou feito nas coxas porque entregaram na véspera.",
   },
@@ -513,8 +513,7 @@ export const expressions: EntryData[] = [
     id: "cereja-do-bolo",
     text: "Cereja do bolo",
     meaning: "O toque final que deixa algo bom ainda melhor.",
-    origin:
-      "Vem provavelmente da confeitaria, em que uma cereja é colocada no alto do bolo.",
+    origin: "Vem da confeitaria, em que uma cereja é colocada no alto do bolo.",
     why: "A cereja não faz o bolo, mas o deixa mais bonito. Representa o detalhe que completa o resultado.",
     example: "Ganhar o prêmio foi a cereja do bolo de um ano ótimo.",
   },
@@ -1432,7 +1431,7 @@ export const expressions: EntryData[] = [
     text: "Santo do pau oco",
     meaning: "Pessoa que parece honesta, mas esconde más intenções.",
     origin:
-      "Vem do Brasil colonial, onde santos de madeira ocos teriam servido para esconder ouro e escapar do imposto.",
+      "Vem do Brasil colonial, onde santos de madeira ocos serviram para esconder ouro e escapar do imposto.",
     why: "Por fora, é um santo. Por dentro, esconde algo. A imagem serve para quem finge virtude.",
     example: "Ele fala de honestidade, mas é um santo do pau oco.",
   },
@@ -2643,7 +2642,7 @@ export const expressions: EntryData[] = [
     text: "Não ter onde cair morto",
     meaning: "Ser muito pobre, sem casa nem recurso nenhum.",
     origin:
-      "A cena é a de alguém tão pobre que, se morresse, não teria um pedaço de chão seu para cair. É expressão popular antiga de pobreza total.",
+      "A cena é a de alguém tão pobre que, se morresse, não ia ter um pedaço de chão seu para cair. É expressão popular antiga de pobreza total.",
     why: "Nem um chão que seja seu para cair. A frase resume a pobreza total.",
     example: "Ele chegou à cidade sem ter onde cair morto.",
   },
@@ -5106,7 +5105,7 @@ export const expressions: EntryData[] = [
     text: "Tirar o pai da forca",
     meaning: "Fazer algo com muita pressa.",
     origin:
-      "Vem da lenda de Santo Antônio, que teria viajado a Lisboa para livrar o pai da condenação.",
+      "Vem da lenda de Santo Antônio, que viajou a Lisboa para livrar o pai da condenação.",
     why: "A pressa é a de quem precisa chegar antes da execução.",
     example: "Quando atrasou, ele correu como quem vai tirar o pai da forca.",
   },

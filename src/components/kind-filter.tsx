@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 const OPTIONS: { kind: EntryKind; label: string }[] = [
   { kind: "expression", label: "Expressões" },
   { kind: "noun-phrase", label: "Locuções" },
+  { kind: "slang", label: "Gírias" },
 ];
 
 export function KindFilter({ className }: { className?: string }) {

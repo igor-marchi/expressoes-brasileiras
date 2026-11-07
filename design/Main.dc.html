@@ -103,13 +103,15 @@ class Component extends DCLogic {
   renderVals() {
     const list = [
       { kind: "expression", text: "Dar com os burros n'água", meaning: "Fracassar, ver um plano dar errado.", origin: "Vem do tempo das tropas de mulas e burros que levavam mercadorias pelo interior. Ao atravessar rios, os animais às vezes caíam na água e a carga se perdia.", why: "Quando os burros iam parar na água, a viagem e o lucro iam junto. O prejuízo virou sinônimo de qualquer empreitada que desanda.", example: "Montei a loja sem pesquisar o mercado e dei com os burros n'água." },
+      { kind: "noun-phrase", text: "Vaca de presépio", meaning: "Pessoa que concorda com tudo e só acompanha, sem opinião.", origin: "Vem da imagem da vaca do presépio de Natal, parada ao lado da manjedoura, só acompanhando a cena sem participar nem opinar.", why: "A vaca do presépio só está ali e balança a cabeça. A imagem é a de quem não se mexe nem dá palpite.", example: "No debate, ele foi vaca de presépio e só concordou." },
+      { kind: "slang", text: "Firmeza", meaning: "Expressa que está tudo bem ou concorda com algo.", origin: "Vem de firme, com o sufixo -eza. Circula na fala de rua e no rap.", why: "Firme é o que não balança nem cede. Dizer firmeza passa a ideia de que está tudo estável e confirmado.", example: "Chegou bem em casa? Firmeza, tudo certo por aqui." },
       { kind: "expression", text: "Boi de piranha", meaning: "Pessoa sacrificada para que os outros passem em segurança.", origin: "Vem da lida com o gado em regiões de rios, como o Pantanal e a Amazônia. Os vaqueiros mandavam um animal de pouco valor à frente para distrair as piranhas.", why: "Enquanto as piranhas atacavam o boi isca, o resto da manada atravessava o rio ilesa. Hoje descreve quem paga pelos outros.", example: "O estagiário virou boi de piranha e levou a culpa pelo erro da equipe." },
-      { kind: "expression", text: "Tirar o cavalinho da chuva", meaning: "Desistir de uma ideia ou de uma expectativa.", origin: "Segundo a versão mais difundida, quem fazia visita rápida deixava o cavalo na chuva. Quem era convidado a ficar o levava para um abrigo.", why: "Tirar o cavalo da chuva indicava que a visita ia durar. A expressão ganhou o sentido de avisar que o outro pode desistir e se acomodar.", example: "Pode tirar o cavalinho da chuva, esse aumento não vai sair." },
-      { kind: "noun-phrase", text: "Vaca de presépio", meaning: "Pessoa que concorda com tudo e só acompanha, sem opinião.", origin: "Vem da imagem da vaca do presépio de Natal, parada ao lado da manjedoura, só acompanhando a cena sem participar nem opinar.", why: "A vaca do presépio só está ali e balança a cabeça. A imagem é a de quem não se mexe nem dá palpite.", example: "No debate, ele foi vaca de presépio e só concordou." }
+      { kind: "expression", text: "Tirar o cavalinho da chuva", meaning: "Desistir de uma ideia ou de uma expectativa.", origin: "Segundo a versão mais difundida, quem fazia visita rápida deixava o cavalo na chuva. Quem era convidado a ficar o levava para um abrigo.", why: "Tirar o cavalo da chuva indicava que a visita ia durar. A expressão ganhou o sentido de avisar que o outro pode desistir e se acomodar.", example: "Pode tirar o cavalinho da chuva, esse aumento não vai sair." }
     ];
     const KINDS = [
       { kind: "expression", label: "Expressões" },
-      { kind: "noun-phrase", label: "Locuções" }
+      { kind: "noun-phrase", label: "Locuções" },
+      { kind: "slang", label: "Gírias" }
     ];
     const ON = "display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 999px; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; background: #0F6B43; color: #FFFFFF; border: 1px solid #0F6B43";
     const OFF = "display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 999px; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; background: #FFFFFF; color: #4F5F56; border: 1px solid #C3CDC0";
@@ -119,6 +121,8 @@ class Component extends DCLogic {
     if (pos < 0) pos = 0;
     const e = vis[pos];
     const progressStyle = "height: 100%; border-radius: 999px; background: #0F6B43; width: " + ((pos + 1) / n * 100) + "%";
+    const KIND_LABEL = { expression: "Expressão popular", "noun-phrase": "Locução substantiva", slang: "Gíria" };
+    const KIND_STYLE = { expression: "display: inline-flex; align-items: center; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; padding: 3px 10px; color: #4F5F56; background: #F4F6F1; border: 1px solid #D9E0D6", "noun-phrase": "display: inline-flex; align-items: center; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; padding: 3px 10px; color: #14231B; background: #FDF1C5; border: 1px solid #F5C518", slang: "display: inline-flex; align-items: center; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; padding: 3px 10px; color: #0F6B43; background: #E4F1EA; border: 1px solid #0F6B43" };
     const chips = KINDS.map((c) => {
       const active = !this.state.off[c.kind];
       return {
@@ -134,8 +138,8 @@ class Component extends DCLogic {
       };
     });
     return {
-      kindLabel: e.kind === "noun-phrase" ? "Locução substantiva" : "Expressão popular",
-      kindStyle: e.kind === "noun-phrase" ? "display: inline-flex; align-items: center; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; padding: 3px 10px; color: #14231B; background: #FDF1C5; border: 1px solid #F5C518" : "display: inline-flex; align-items: center; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; padding: 3px 10px; color: #4F5F56; background: #F4F6F1; border: 1px solid #D9E0D6",
+      kindLabel: KIND_LABEL[e.kind],
+      kindStyle: KIND_STYLE[e.kind],
       text: e.text, meaning: e.meaning, origin: e.origin, why: e.why, example: e.example,
       counter: (pos + 1) + " de " + n,
       chips,

@@ -80,12 +80,13 @@ class Component extends DCLogic {
   }
   renderVals() {
     const all = [
-      { id: "a", label: "1 DE 798", kind: "expression", text: "Dar com os burros n'água", meaning: "Fracassar, ver um plano dar errado." },
-      { id: "b", label: "4 DE 798", kind: "noun-phrase", text: "Cabelo ruim", meaning: "Forma de dizer que o cabelo crespo é difícil de tratar." },
-      { id: "c", label: "8 DE 798", kind: "noun-phrase", text: "Arraia-miúda", meaning: "O povo comum, as pessoas simples e sem poder." }
+      { id: "a", label: "1 DE 910", kind: "expression", text: "Dar com os burros n'água", meaning: "Fracassar, ver um plano dar errado." },
+      { id: "b", label: "5 DE 910", kind: "noun-phrase", text: "Cabelo ruim", meaning: "Forma de dizer que o cabelo crespo é difícil de tratar." },
+      { id: "c", label: "11 DE 910", kind: "noun-phrase", text: "Arraia-miúda", meaning: "O povo comum, as pessoas simples e sem poder." },
+      { id: "d", label: "3 DE 910", kind: "slang", text: "Firmeza", meaning: "Expressa que está tudo bem ou concorda com algo." }
     ];
-    const LABELS = { expression: "Expressão popular", "noun-phrase": "Locução substantiva" };
-    const STYLES = { expression: "display: inline-flex; align-items: center; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; padding: 3px 10px; color: #4F5F56; background: #F4F6F1; border: 1px solid #D9E0D6", "noun-phrase": "display: inline-flex; align-items: center; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; padding: 3px 10px; color: #14231B; background: #FDF1C5; border: 1px solid #F5C518" };
+    const LABELS = { expression: "Expressão popular", "noun-phrase": "Locução substantiva", slang: "Gíria" };
+    const STYLES = { expression: "display: inline-flex; align-items: center; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; padding: 3px 10px; color: #4F5F56; background: #F4F6F1; border: 1px solid #D9E0D6", "noun-phrase": "display: inline-flex; align-items: center; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; padding: 3px 10px; color: #14231B; background: #FDF1C5; border: 1px solid #F5C518", slang: "display: inline-flex; align-items: center; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; padding: 3px 10px; color: #0F6B43; background: #E4F1EA; border: 1px solid #0F6B43" };
     const kept = all.filter((x) => !this.state.removed[x.id]);
     const items = kept.map((x) => ({ ...x, tagLabel: LABELS[x.kind], tagStyle: STYLES[x.kind], remove: () => this.setState({ removed: { ...this.state.removed, [x.id]: true } }) }));
     const n = kept.length;

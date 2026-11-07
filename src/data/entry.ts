@@ -1,9 +1,10 @@
-export type EntryKind = "expression" | "noun-phrase";
+export type EntryKind = "expression" | "noun-phrase" | "slang";
 
 /** How an entry is classified, as shown on the cards. */
 export const KIND_LABEL: Record<EntryKind, string> = {
   expression: "Expressão popular",
   "noun-phrase": "Locução substantiva",
+  slang: "Gíria",
 };
 
 /** What a data file holds for each entry. */
