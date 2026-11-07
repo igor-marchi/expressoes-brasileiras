@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 
+import { expressions } from "../src/data/expressions";
 import {
   FIRST_EXPRESSION,
   LAST_EXPRESSION,
@@ -189,5 +190,40 @@ test.describe("mobile", () => {
 
     expect(next!.x + next!.width).toBeLessThanOrEqual(320);
     expect(overflow).toBe(false);
+  });
+
+  test("the page height follows the current expression, not its neighbors", async ({
+    page,
+  }) => {
+    const size = (item: (typeof expressions)[number]) =>
+      item.origin.length + item.why.length + item.example.length;
+    const gap = (index: number) =>
+      Math.max(
+        size(expressions[(index + 1) % expressions.length]),
+        size(
+          expressions[(index + expressions.length - 1) % expressions.length],
+        ),
+      ) - size(expressions[index]);
+    const shortest = expressions.reduce(
+      (best, _, index) => (gap(index) > gap(best) ? index : best),
+      0,
+    );
+
+    await page.setViewportSize({ width: 412, height: 1400 });
+    await open(page, `/?expression=${expressions[shortest].id}`);
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+
+    const extra = await page.evaluate(() => {
+      const bottom = (element: Element | null) =>
+        element ? element.getBoundingClientRect().bottom : 0;
+      const slide = document.querySelector("[data-testid=swiper] h1");
+      const footer = document.querySelector("main > footer");
+      return (
+        footer!.getBoundingClientRect().top -
+        bottom(slide?.closest(".mx-auto") ?? null)
+      );
+    });
+
+    expect(extra).toBeLessThan(200);
   });
 });

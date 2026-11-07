@@ -99,25 +99,33 @@ export function ExpressionSwiper({
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerEnd}
       onPointerCancel={handlePointerEnd}
-      className="min-h-0 flex-1 touch-pan-y overflow-hidden select-none"
+      className="relative flex min-h-0 flex-1 touch-pan-y flex-col overflow-hidden select-none"
     >
       <div
         className={cn(
-          "flex h-full",
+          "relative flex flex-1 flex-col",
           phase === "settling" && "transition-transform duration-200 ease-out",
         )}
-        style={{ transform: `translateX(calc(-100% + ${offset}px))` }}
+        style={{ transform: `translateX(${offset}px)` }}
       >
-        <div className="flex w-full shrink-0 overflow-y-auto" aria-hidden inert>
+        <div
+          className="absolute inset-y-0 -left-full flex w-full flex-col"
+          aria-hidden
+          inert
+        >
           <ExpressionContent
             expression={expressions[previous]}
             index={previous}
           />
         </div>
-        <div className="flex w-full shrink-0 overflow-y-auto">
+        <div className="flex flex-1 flex-col">
           <ExpressionContent expression={expressions[index]} index={index} />
         </div>
-        <div className="flex w-full shrink-0 overflow-y-auto" aria-hidden inert>
+        <div
+          className="absolute inset-y-0 left-full flex w-full flex-col"
+          aria-hidden
+          inert
+        >
           <ExpressionContent expression={expressions[next]} index={next} />
         </div>
       </div>

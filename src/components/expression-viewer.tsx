@@ -108,7 +108,7 @@ export function ExpressionViewer({
       <main className="flex min-h-0 flex-1 flex-col">
         <ExpressionSwiper index={index} onChange={setSelected} />
 
-        <footer className="flex flex-col gap-3.5 border-t border-border bg-background px-5 pt-3 pb-7">
+        <footer className="sticky bottom-0 z-10 flex flex-col gap-3.5 border-t border-border bg-background px-5 pt-3 pb-7">
           <p
             aria-hidden="true"
             className="flex items-center justify-center gap-2.5 text-[13px] font-medium text-muted-foreground"
