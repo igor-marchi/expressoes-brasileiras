@@ -3,6 +3,9 @@ import type { Page } from "@playwright/test";
 import { expressions } from "../src/data/expressions";
 
 export const TOTAL_EXPRESSIONS = expressions.length;
+export const PAGE_SIZE = 20;
+export const TOTAL_PAGES = Math.ceil(TOTAL_EXPRESSIONS / PAGE_SIZE);
+export const TAIL_SIZE = TOTAL_EXPRESSIONS - PAGE_SIZE * (TOTAL_PAGES - 1);
 export const FIRST_EXPRESSION = expressions[0];
 export const LAST_EXPRESSION = expressions[expressions.length - 1];
 

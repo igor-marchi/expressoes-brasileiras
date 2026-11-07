@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import { open, TOTAL_EXPRESSIONS } from "./helpers";
+import { open, PAGE_SIZE, TOTAL_EXPRESSIONS, TOTAL_PAGES } from "./helpers";
 
 test.describe("mobile", () => {
   test("desktop nav is hidden and the menu button is shown", async ({
@@ -81,7 +81,8 @@ test.describe("mobile", () => {
     await open(page, "/expressions");
 
     const cards = page.locator("main a");
-    await expect(cards).toHaveCount(TOTAL_EXPRESSIONS);
+    await expect(cards).toHaveCount(PAGE_SIZE);
+    await expect(cards.nth(1)).toBeVisible();
     const first = await cards.nth(0).boundingBox();
     const second = await cards.nth(1).boundingBox();
     expect(second!.y).toBeGreaterThan(first!.y);
@@ -91,5 +92,20 @@ test.describe("mobile", () => {
       () => document.documentElement.scrollWidth > window.innerWidth,
     );
     expect(overflow).toBe(false);
+  });
+
+  test("pagination is compact and Próxima works", async ({ page }) => {
+    await open(page, "/expressions");
+    const nav = page.getByRole("navigation", { name: "Paginação" });
+
+    await expect(nav.getByText(`Página 1 de ${TOTAL_PAGES}`)).toBeVisible();
+    await expect(
+      nav.getByRole("button", { name: "Página 2", exact: true }),
+    ).toBeHidden();
+
+    await nav.getByRole("button", { name: "Próxima página" }).click();
+
+    await expect(nav.getByText(`Página 2 de ${TOTAL_PAGES}`)).toBeVisible();
+    await expect(page).toHaveURL(/page=2$/);
   });
 });

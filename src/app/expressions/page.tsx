@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 
 import { ExpressionList } from "@/components/expression-list";
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function ExpressionsPage() {
-  return <ExpressionList />;
+  return (
+    <Suspense fallback={<main className="flex-1" />}>
+      <ExpressionList />
+    </Suspense>
+  );
 }

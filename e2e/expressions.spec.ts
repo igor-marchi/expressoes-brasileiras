@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import { open, TOTAL_EXPRESSIONS } from "./helpers";
+import { open, PAGE_SIZE, TOTAL_EXPRESSIONS } from "./helpers";
 
 test.describe("all expressions", () => {
   test("lists every expression with its position and meaning", async ({
@@ -11,7 +11,7 @@ test.describe("all expressions", () => {
     await expect(
       page.getByText(`${TOTAL_EXPRESSIONS} expressões. Escolha uma`),
     ).toBeVisible();
-    await expect(page.locator("main a")).toHaveCount(TOTAL_EXPRESSIONS);
+    await expect(page.locator("main a")).toHaveCount(PAGE_SIZE);
     await expect(
       page.getByText(`1 de ${TOTAL_EXPRESSIONS}`, { exact: true }),
     ).toBeVisible();
@@ -83,7 +83,7 @@ test.describe("all expressions", () => {
     await expect(page.locator("main a")).toHaveCount(1);
 
     await search.fill("");
-    await expect(page.locator("main a")).toHaveCount(TOTAL_EXPRESSIONS);
+    await expect(page.locator("main a")).toHaveCount(PAGE_SIZE);
   });
 
   test("filtered cards keep their original position number", async ({

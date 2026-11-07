@@ -8,7 +8,8 @@ O artefato é a fonte da verdade da interface. Estes arquivos ficam no repositó
 | --- | --- | --- |
 | [Main.dc.html](Main.dc.html) | Expressão (desktop) | [expression-viewer.tsx](../src/components/expression-viewer.tsx) |
 | [Mobile.dc.html](Mobile.dc.html) | Expressão (celular) | [expression-viewer.tsx](../src/components/expression-viewer.tsx) |
-| [Todas.dc.html](Todas.dc.html) | Todas as expressões | [expression-list.tsx](../src/components/expression-list.tsx) |
+| [Todas.dc.html](Todas.dc.html) | Todas as expressões (desktop) | [expression-list.tsx](../src/components/expression-list.tsx) |
+| [TodasMobile.dc.html](TodasMobile.dc.html) | Todas as expressões (celular) | [expression-list.tsx](../src/components/expression-list.tsx) |
 | [Favoritas.dc.html](Favoritas.dc.html) | Favoritas | [favorites-list.tsx](../src/components/favorites-list.tsx) |
 | [FavoritasVazio.dc.html](FavoritasVazio.dc.html) | Favoritas sem itens | [favorites-list.tsx](../src/components/favorites-list.tsx) |
 | [canvas.json](canvas.json) | Posição das telas no canvas | |
