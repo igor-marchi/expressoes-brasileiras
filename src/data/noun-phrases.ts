@@ -118,6 +118,15 @@ export const nounPhrases: EntryData[] = [
     example: "Sou cabeça-oca, deixei a chave dentro do carro de novo.",
   },
   {
+    id: "cabeca-de-bagre",
+    text: "Cabeça de bagre",
+    meaning: "Pessoa pouco esperta ou distraída. No futebol, jogador ruim.",
+    origin:
+      "Compara a pessoa ao bagre, peixe de cabeça grande e achatada. Os dicionários registram o sentido geral e o do futebol.",
+    why: "A cabeça grande do bagre dá a imagem de muito tamanho e pouco miolo.",
+    example: "Esqueci a chave de novo, sou mesmo um cabeça de bagre.",
+  },
+  {
     id: "barriga-de-aluguel",
     text: "Barriga de aluguel",
     meaning: "Mulher que gera um bebê para outra pessoa ou casal.",
@@ -144,6 +153,15 @@ export const nounPhrases: EntryData[] = [
       "Vem da imagem de uma mosca caída, imóvel, que não zumbe nem se mexe. Quem é mosca-morta fica parado, sem iniciativa.",
     why: "A mosca viva incomoda e voa. A morta não faz nada, e é assim que se vê quem não reage a coisa alguma.",
     example: "Ele é uma mosca-morta, nunca dá opinião nem toma decisão.",
+  },
+  {
+    id: "boca-mole",
+    text: "Boca mole",
+    meaning: "Pessoa que não guarda segredo e fala o que devia calar.",
+    origin:
+      "Junta boca e mole. Os dicionários registram a palavra composta com esse sentido.",
+    why: "Uma boca mole não fecha direito e deixa escapar o que ouviu.",
+    example: "Não conte nada para ele, que é boca mole.",
   },
   {
     id: "sangue-frio",

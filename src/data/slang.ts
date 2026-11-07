@@ -294,6 +294,15 @@ export const slang: EntryData[] = [
     example: "Pode falar, truta, eu te ajudo.",
   },
   {
+    id: "cupincha",
+    text: "Cupincha",
+    meaning: "Amigo e companheiro de todas as horas.",
+    origin:
+      "Palavra coloquial da língua portuguesa, registrada nos dicionários para designar o amigo e o companheiro.",
+    why: "O som da palavra é afetuoso e brincalhão, e combina com o amigo que anda sempre junto.",
+    example: "Ele chegou com o cupincha de sempre e já foi sentando.",
+  },
+  {
     id: "vei",
     text: "Véi",
     meaning: "Cara, amigo; usado para chamar alguém de forma informal.",
@@ -301,6 +310,16 @@ export const slang: EntryData[] = [
       "É a pronúncia reduzida de velho. O lh de velho vira i na fala, e sai vei.",
     why: "Chamar o amigo de velho é um tratamento de proximidade, sem relação com a idade. A forma curta é a que se fala no dia a dia.",
     example: "Véi, você viu o jogo de ontem?",
+  },
+  {
+    id: "ze",
+    text: "Zé",
+    meaning:
+      "Homem qualquer, comum, sem identificação. Também serve para chamar alguém de modo informal.",
+    origin:
+      "É a forma reduzida de José, um dos nomes mais comuns do Brasil. Entra em compostos como Zé ninguém e Zé povinho.",
+    why: "Como José é um nome muito comum, Zé funciona como representante de qualquer um.",
+    example: "Chegou um zé na porta perguntando pelo gerente.",
   },
   {
     id: "joia",
