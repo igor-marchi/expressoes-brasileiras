@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -14,17 +14,37 @@ import {
   ExpressionCounter,
 } from "@/components/expression-content";
 import { ExpressionSwiper } from "@/components/expression-swiper";
+import { KindFilter } from "@/components/kind-filter";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { entries } from "@/data/entries";
+import type { Entry } from "@/data/entry";
 import { useFavorites } from "@/hooks/use-favorites";
 import { useIsMobile } from "@/hooks/use-is-mobile";
+import { useFilteredEntries } from "@/hooks/use-kind-filter";
 import {
   saveLastExpression,
   useLastExpression,
 } from "@/hooks/use-last-expression";
 
-const total = entries.length;
+/** Position of the current entry among the visible ones. When its type is
+ * turned off, the next visible entry in the usual order takes its place. */
+function resolveIndex(items: Entry[], id: string | undefined) {
+  const at = items.findIndex((item) => item.id === id);
+  if (at >= 0) return at;
+
+  const position = entries.findIndex((item) => item.id === id);
+  if (position < 0) return 0;
+
+  const visible = new Set(items.map((item) => item.id));
+  for (let step = 1; step <= entries.length; step++) {
+    const candidate = entries[(position + step) % entries.length];
+    if (visible.has(candidate.id)) {
+      return items.findIndex((item) => item.id === candidate.id);
+    }
+  }
+  return 0;
+}
 
 function isTypingTarget(target: EventTarget | null) {
   if (!(target instanceof HTMLElement)) return false;
@@ -34,28 +54,34 @@ function isTypingTarget(target: EventTarget | null) {
   );
 }
 
-export function ExpressionViewer({
-  initialIndex,
-}: {
-  initialIndex: number | null;
-}) {
-  const [selected, setSelected] = useState(initialIndex);
+export function ExpressionViewer({ initialId }: { initialId: string | null }) {
+  const [selected, setSelected] = useState(initialId);
+  const { items, loaded } = useFilteredEntries();
   const lastId = useLastExpression();
   const isMobile = useIsMobile();
   const { isFavorite, toggle } = useFavorites();
 
-  const lastIndex = entries.findIndex((item) => item.id === lastId);
-  const index = selected ?? Math.max(lastIndex, 0);
-  const expression = entries[index];
+  const total = items.length;
+  const index = resolveIndex(items, selected ?? lastId ?? undefined);
+  const expression = items[index];
   const favorite = isFavorite(expression.id);
   const ready =
-    isMobile !== undefined && (selected !== null || lastId !== undefined);
+    isMobile !== undefined &&
+    loaded &&
+    (selected !== null || lastId !== undefined);
 
   useEffect(() => {
     if (ready) {
       saveLastExpression(expression.id);
     }
   }, [ready, expression.id]);
+
+  const goTo = useCallback(
+    (target: number) => {
+      setSelected(items[(target + items.length) % items.length].id);
+    },
+    [items],
+  );
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
@@ -71,15 +97,15 @@ export function ExpressionViewer({
       }
 
       if (event.key === "ArrowRight") {
-        setSelected((index + 1) % total);
+        goTo(index + 1);
       } else if (event.key === "ArrowLeft") {
-        setSelected((index + total - 1) % total);
+        goTo(index - 1);
       }
     }
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [index]);
+  }, [index, goTo]);
 
   if (!ready) {
     return <main className="flex-1" />;
@@ -109,10 +135,19 @@ export function ExpressionViewer({
   if (isMobile) {
     return (
       <main className="flex min-h-0 flex-1 flex-col">
-        <div className="mx-auto w-full max-w-6xl px-5 pt-6">
-          <ExpressionCounter index={index} kind={expression.kind} />
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-5 pt-6">
+          <KindFilter />
+          <ExpressionCounter
+            index={index}
+            total={total}
+            kind={expression.kind}
+          />
         </div>
-        <ExpressionSwiper index={index} onChange={setSelected} />
+        <ExpressionSwiper
+          items={items}
+          index={index}
+          onChange={(target) => setSelected(items[target].id)}
+        />
 
         <footer className="sticky bottom-0 z-10 flex flex-col gap-3.5 border-t border-border bg-background px-5 pt-3 pb-7">
           <p
@@ -131,7 +166,10 @@ export function ExpressionViewer({
 
   return (
     <main className="flex flex-1 flex-col">
-      <ExpressionContent expression={expression} index={index} />
+      <div className="mx-auto w-full max-w-6xl px-16 pt-10">
+        <KindFilter />
+      </div>
+      <ExpressionContent expression={expression} index={index} total={total} />
 
       <footer className="mx-auto w-full max-w-6xl px-16 pb-14">
         <div className="flex flex-wrap items-center justify-between gap-6 border-t border-border pt-8">
@@ -152,7 +190,7 @@ export function ExpressionViewer({
             {favoriteButton}
             <Button
               variant="outline"
-              onClick={() => setSelected((index + total - 1) % total)}
+              onClick={() => goTo(index - 1)}
               aria-keyshortcuts="ArrowLeft"
               className="h-[52px] gap-3 rounded-full border-input bg-card px-7 text-lg font-semibold hover:bg-secondary"
             >
@@ -160,7 +198,7 @@ export function ExpressionViewer({
               Anterior
             </Button>
             <Button
-              onClick={() => setSelected((index + 1) % total)}
+              onClick={() => goTo(index + 1)}
               aria-keyshortcuts="ArrowRight"
               className="h-[52px] gap-3 rounded-full px-7 text-lg font-semibold"
             >

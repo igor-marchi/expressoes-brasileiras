@@ -6,8 +6,9 @@ import { Search } from "lucide-react";
 
 import { ExpressionCardLink } from "@/components/expression-card-link";
 import { ListPagination } from "@/components/list-pagination";
-import { entries } from "@/data/entries";
+import { KindFilter } from "@/components/kind-filter";
 import { useIsMobile } from "@/hooks/use-is-mobile";
+import { useFilteredEntries } from "@/hooks/use-kind-filter";
 
 const DESKTOP_PAGE_SIZE = 10;
 const MOBILE_PAGE_SIZE = 5;
@@ -38,6 +39,7 @@ function updateUrl(query: string, page: number, mode: "push" | "replace") {
 
 export function ExpressionList() {
   const initial = useSearchParams();
+  const { items: visible } = useFilteredEntries();
   const pageSize = useIsMobile() ? MOBILE_PAGE_SIZE : DESKTOP_PAGE_SIZE;
   const [query, setQuery] = useState(initial.get("q") ?? "");
   const [requestedPage, setRequestedPage] = useState(
@@ -57,7 +59,7 @@ export function ExpressionList() {
 
   const term = normalize(query.trim());
 
-  const items = entries
+  const items = visible
     .map((expression, index) => ({ expression, index }))
     .filter(
       ({ expression }) =>
@@ -91,7 +93,7 @@ export function ExpressionList() {
             Todas as expressões
           </h1>
           <p className="text-lg text-muted-foreground">
-            {entries.length} expressões. Escolha uma para ver origem e
+            {visible.length} expressões. Escolha uma para ver origem e
             significado.
           </p>
         </div>
@@ -111,6 +113,8 @@ export function ExpressionList() {
         </div>
       </div>
 
+      <KindFilter />
+
       {items.length === 0 ? (
         <p className="text-muted-foreground">Nenhuma expressão encontrada.</p>
       ) : (
@@ -121,7 +125,7 @@ export function ExpressionList() {
                 key={expression.id}
                 expression={expression}
                 position={index + 1}
-                total={entries.length}
+                total={visible.length}
               />
             ))}
           </div>

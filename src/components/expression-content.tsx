@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { KindTag } from "@/components/kind-tag";
 import type { EntryKind } from "@/data/entry";
-import { entries, type Entry } from "@/data/entries";
+import type { Entry } from "@/data/entry";
 
 const labelClass =
   "text-xs font-semibold uppercase tracking-[0.1em] text-primary md:text-[13px]";
@@ -11,15 +11,17 @@ const bodyClass = "text-[15px] leading-normal md:text-[17px] md:leading-[1.55]";
 
 export function ExpressionCounter({
   index,
+  total,
   kind,
 }: {
   index: number;
+  total: number;
   kind: EntryKind;
 }) {
   return (
     <div className="flex items-center gap-2.5 md:gap-3">
       <span className="rounded-full bg-accent px-2.5 py-[5px] text-[13px] font-semibold text-accent-foreground md:px-3 md:py-1.5 md:text-sm">
-        {index + 1} de {entries.length}
+        {index + 1} de {total}
       </span>
       <KindTag kind={kind} />
     </div>
@@ -29,10 +31,12 @@ export function ExpressionCounter({
 export function ExpressionContent({
   expression,
   index,
+  total,
   showCounter = true,
 }: {
   expression: Entry;
   index: number;
+  total: number;
   showCounter?: boolean;
 }) {
   return (
@@ -45,7 +49,11 @@ export function ExpressionContent({
       <div className="grid items-start gap-6 lg:grid-cols-2 lg:gap-12">
         <div className="flex min-w-0 flex-col gap-5 md:gap-6">
           {showCounter && (
-            <ExpressionCounter index={index} kind={expression.kind} />
+            <ExpressionCounter
+              index={index}
+              total={total}
+              kind={expression.kind}
+            />
           )}
           <h1 className="font-heading text-[42px] leading-[1.05] font-extrabold tracking-tight text-balance md:text-[68px] md:leading-[1.02]">
             {expression.text}

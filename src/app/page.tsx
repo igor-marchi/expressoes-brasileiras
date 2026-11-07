@@ -10,9 +10,9 @@ async function SelectedExpression({
 }) {
   const { expression } = await searchParams;
   const id = typeof expression === "string" ? expression : undefined;
-  const found = entries.findIndex((item) => item.id === id);
+  const found = entries.some((item) => item.id === id);
 
-  return <ExpressionViewer key={id} initialIndex={found >= 0 ? found : null} />;
+  return <ExpressionViewer key={id} initialId={found && id ? id : null} />;
 }
 
 export default function Home({ searchParams }: PageProps<"/">) {

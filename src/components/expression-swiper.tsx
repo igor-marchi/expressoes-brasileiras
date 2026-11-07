@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type PointerEvent } from "react";
 
 import { ExpressionContent } from "@/components/expression-content";
-import { entries } from "@/data/entries";
+import type { Entry } from "@/data/entry";
 import { cn } from "@/lib/utils";
 
 const SWIPE_DISTANCE = 60;
@@ -16,13 +16,15 @@ function prefersReducedMotion() {
 }
 
 export function ExpressionSwiper({
+  items,
   index,
   onChange,
 }: {
+  items: Entry[];
   index: number;
   onChange: (index: number) => void;
 }) {
-  const total = entries.length;
+  const total = items.length;
   const previous = (index + total - 1) % total;
   const next = (index + 1) % total;
 
@@ -114,15 +116,17 @@ export function ExpressionSwiper({
           inert
         >
           <ExpressionContent
-            expression={entries[previous]}
+            expression={items[previous]}
             index={previous}
+            total={total}
             showCounter={false}
           />
         </div>
         <div className="flex flex-1 flex-col">
           <ExpressionContent
-            expression={entries[index]}
+            expression={items[index]}
             index={index}
+            total={total}
             showCounter={false}
           />
         </div>
@@ -132,8 +136,9 @@ export function ExpressionSwiper({
           inert
         >
           <ExpressionContent
-            expression={entries[next]}
+            expression={items[next]}
             index={next}
+            total={total}
             showCounter={false}
           />
         </div>

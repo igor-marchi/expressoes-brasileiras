@@ -33,6 +33,16 @@ button{font-family:inherit}
 
 <main style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 48px; padding: 56px 64px; max-width: 1152px; margin: 0 auto; width: 100%; box-sizing: border-box">
 
+<div role="group" aria-label="Filtrar por tipo" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<span style="font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #4F5F56; font-weight: 600">Mostrar</span>
+<sc-for list="{{chips}}" as="c" hint-placeholder-count="2">
+<button onClick="{{c.toggle}}" aria-pressed="{{c.pressed}}" style="{{c.style}}">
+<span style="{{c.checkStyle}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+{{c.label}}
+</button>
+</sc-for>
+</div>
+
 <div style="display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start">
 
 <div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
@@ -88,7 +98,7 @@ Próximo
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { i: 0, favs: {} };
+    this.state = { i: 0, favs: {}, off: {} };
   }
   renderVals() {
     const list = [
@@ -97,21 +107,45 @@ class Component extends DCLogic {
       { kind: "expression", text: "Tirar o cavalinho da chuva", meaning: "Desistir de uma ideia ou de uma expectativa.", origin: "Segundo a versão mais difundida, quem fazia visita rápida deixava o cavalo na chuva. Quem era convidado a ficar o levava para um abrigo.", why: "Tirar o cavalo da chuva indicava que a visita ia durar. A expressão ganhou o sentido de avisar que o outro pode desistir e se acomodar.", example: "Pode tirar o cavalinho da chuva, esse aumento não vai sair." },
       { kind: "noun-phrase", text: "Vaca de presépio", meaning: "Pessoa que concorda com tudo e só acompanha, sem opinião.", origin: "Vem da imagem da vaca do presépio de Natal, parada ao lado da manjedoura, só acompanhando a cena sem participar nem opinar.", why: "A vaca do presépio só está ali e balança a cabeça. A imagem é a de quem não se mexe nem dá palpite.", example: "No debate, ele foi vaca de presépio e só concordou." }
     ];
-    const n = list.length;
-    const e = list[this.state.i];
-    const progressStyle = "height: 100%; border-radius: 999px; background: #0F6B43; width: " + ((this.state.i + 1) / n * 100) + "%";
+    const KINDS = [
+      { kind: "expression", label: "Expressões" },
+      { kind: "noun-phrase", label: "Locuções" }
+    ];
+    const ON = "display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 999px; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; background: #0F6B43; color: #FFFFFF; border: 1px solid #0F6B43";
+    const OFF = "display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 999px; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; background: #FFFFFF; color: #4F5F56; border: 1px solid #C3CDC0";
+    const vis = list.map((x, k) => ({ ...x, k })).filter((x) => !this.state.off[x.kind]);
+    const n = vis.length;
+    let pos = vis.findIndex((x) => x.k >= this.state.i);
+    if (pos < 0) pos = 0;
+    const e = vis[pos];
+    const progressStyle = "height: 100%; border-radius: 999px; background: #0F6B43; width: " + ((pos + 1) / n * 100) + "%";
+    const chips = KINDS.map((c) => {
+      const active = !this.state.off[c.kind];
+      return {
+        label: c.label,
+        pressed: active ? "true" : "false",
+        style: active ? ON : OFF,
+        checkStyle: active ? "display: inline-flex" : "display: none",
+        toggle: () => {
+          const others = KINDS.filter((o) => o.kind !== c.kind && !this.state.off[o.kind]);
+          if (active && others.length === 0) return;
+          this.setState({ off: { ...this.state.off, [c.kind]: active } });
+        }
+      };
+    });
     return {
       kindLabel: e.kind === "noun-phrase" ? "Locução substantiva" : "Expressão popular",
       kindStyle: e.kind === "noun-phrase" ? "display: inline-flex; align-items: center; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; padding: 3px 10px; color: #14231B; background: #FDF1C5; border: 1px solid #F5C518" : "display: inline-flex; align-items: center; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; padding: 3px 10px; color: #4F5F56; background: #F4F6F1; border: 1px solid #D9E0D6",
       text: e.text, meaning: e.meaning, origin: e.origin, why: e.why, example: e.example,
-      counter: (this.state.i + 1) + " de " + n,
+      counter: (pos + 1) + " de " + n,
+      chips,
       progressStyle,
-      starFill: this.state.favs[this.state.i] ? "#F5C518" : "none",
-      pressed: this.state.favs[this.state.i] ? "true" : "false",
-      favLabel: this.state.favs[this.state.i] ? "Favoritada" : "Favoritar",
-      toggleFav: () => this.setState({ favs: { ...this.state.favs, [this.state.i]: !this.state.favs[this.state.i] } }),
-      prev: () => this.setState({ i: (this.state.i + n - 1) % n }),
-      next: () => this.setState({ i: (this.state.i + 1) % n })
+      starFill: this.state.favs[e.k] ? "#F5C518" : "none",
+      pressed: this.state.favs[e.k] ? "true" : "false",
+      favLabel: this.state.favs[e.k] ? "Favoritada" : "Favoritar",
+      toggleFav: () => this.setState({ favs: { ...this.state.favs, [e.k]: !this.state.favs[e.k] } }),
+      prev: () => this.setState({ i: vis[(pos + n - 1) % n].k }),
+      next: () => this.setState({ i: vis[(pos + 1) % n].k })
     };
   }
 }

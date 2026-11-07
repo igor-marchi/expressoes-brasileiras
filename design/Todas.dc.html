@@ -44,6 +44,12 @@ a{color:#14231B;text-decoration:none}a:hover{color:#0F6B43}
 </div>
 </div>
 
+<div role="group" aria-label="Filtrar por tipo" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<span style="font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #4F5F56; font-weight: 600">Mostrar</span>
+<span style="display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 999px; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; background: #0F6B43; color: #FFFFFF; border: 1px solid #0F6B43"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> Expressões</span>
+<span style="display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 999px; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; background: #0F6B43; color: #FFFFFF; border: 1px solid #0F6B43"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> Locuções</span>
+</div>
+
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
 <sc-for list="{{cards}}" as="c" hint-placeholder-count="10">
 <div style="position: relative; display: flex; flex-direction: column">
