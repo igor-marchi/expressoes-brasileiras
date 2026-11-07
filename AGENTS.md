@@ -7,7 +7,7 @@ App em Next.js que mostra expressões populares brasileiras, uma por vez, com bo
 - Comandos (dev, build, lint, e2e): [scripts do package.json](package.json#L6-L15). Use sempre `pnpm`.
 - Stack e versões: [package.json](package.json). Sem backend nem banco.
 - Rotas: [src/app/](src/app). A home aceita `?expression=<id>` ([page.tsx](src/app/page.tsx)).
-- Dados e tipo `Expression`: [src/data/expressions.ts](src/data/expressions.ts).
+- Dados: [expressions.ts](src/data/expressions.ts) (expressões) e [noun-phrases.ts](src/data/noun-phrases.ts) (locuções substantivas), cada lista na sua ordem de fama. [entries.ts](src/data/entries.ts) junta as duas alternando uma de cada (expressão, locução, expressão…) e, quando uma acaba, segue com a outra. As listas não dependem uma da outra. Tipos em [entry.ts](src/data/entry.ts).
 - Favoritas: [use-favorites.ts](src/hooks/use-favorites.ts).
 - Tokens de cor, fonte e raio: [globals.css](src/app/globals.css#L51).
 - Testes e2e: [e2e/](e2e) e [playwright.config.ts](playwright.config.ts).

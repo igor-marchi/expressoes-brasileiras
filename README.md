@@ -10,7 +10,7 @@ App que mostra expressões populares brasileiras, uma por vez: significado, orig
 
 ## Tecnologias
 
-Next.js, React, Tailwind CSS e shadcn/ui. Não tem backend nem banco de dados: as expressões ficam em [src/data/expressions.ts](src/data/expressions.ts) e as favoritas no `localStorage`. As versões estão no [package.json](package.json).
+Next.js, React, Tailwind CSS e shadcn/ui. Não tem backend nem banco de dados: as expressões e as locuções substantivas ficam em [src/data](src/data) e as favoritas no `localStorage`. As versões estão no [package.json](package.json).
 
 ## Como rodar
 
