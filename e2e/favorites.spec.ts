@@ -1,6 +1,13 @@
 import { expect, test } from "@playwright/test";
 
-import { open, PAGE_SIZE, storedFavorites } from "./helpers";
+import { entries } from "../src/data/entries";
+import {
+  FIRST_EXPRESSION,
+  open,
+  PAGE_SIZE,
+  SECOND,
+  storedFavorites,
+} from "./helpers";
 
 test.describe("favorites on the home screen", () => {
   test("Favoritar toggles the button state", async ({ page }) => {
@@ -52,8 +59,8 @@ test.describe("favorites on the home screen", () => {
 
     await page.getByRole("button", { name: "Favoritar" }).click();
     expect(await storedFavorites(page)).toEqual([
-      "burros-nagua",
-      "boi-de-piranha",
+      FIRST_EXPRESSION.id,
+      SECOND.id,
     ]);
   });
 });
@@ -70,7 +77,7 @@ test.describe("favorites on the list", () => {
     await expect(
       page.getByRole("button", { name: "Remover dos favoritos" }),
     ).toHaveCount(1);
-    expect(await storedFavorites(page)).toEqual(["pe-na-jaca"]);
+    expect(await storedFavorites(page)).toEqual([entries[3].id]);
 
     await page.getByRole("button", { name: "Remover dos favoritos" }).click();
     await expect(
@@ -99,7 +106,7 @@ test.describe("favorites on the list", () => {
       .nth(3)
       .click();
 
-    await open(page, "/?expression=pe-na-jaca");
+    await open(page, `/?expression=${entries[3].id}`);
 
     await expect(
       page.getByRole("button", { name: "Remover dos favoritos" }),
@@ -157,7 +164,7 @@ test.describe("favorites page", () => {
     const cards = page.locator("main a");
     await expect(cards).toHaveCount(2);
     await expect(cards.nth(0)).toContainText("Dar com os burros n'água");
-    await expect(cards.nth(1)).toContainText("Ficar a ver navios");
+    await expect(cards.nth(1)).toContainText(entries[5].text);
   });
 
   test("uses the singular when there is one favorite", async ({ page }) => {
@@ -223,11 +230,9 @@ test.describe("favorites storage", () => {
   });
 
   test("ids that do not exist are not listed", async ({ page }) => {
-    await page.addInitScript(() =>
-      localStorage.setItem(
-        "favorites",
-        JSON.stringify(["pe-na-jaca", "ghost"]),
-      ),
+    await page.addInitScript(
+      (id) => localStorage.setItem("favorites", JSON.stringify([id, "ghost"])),
+      FIRST_EXPRESSION.id,
     );
     await open(page, "/favorites");
 

@@ -1,6 +1,13 @@
 import { expect, test } from "@playwright/test";
 
-import { open, PAGE_SIZE, TOTAL_EXPRESSIONS } from "./helpers";
+import {
+  FIRST_NOUN_PHRASE,
+  open,
+  PAGE_SIZE,
+  positionOf,
+  THIRD,
+  TOTAL_EXPRESSIONS,
+} from "./helpers";
 
 test.describe("all expressions", () => {
   test("lists every expression with its position and meaning", async ({
@@ -25,11 +32,11 @@ test.describe("all expressions", () => {
   }) => {
     await open(page, "/expressions");
 
-    await page.getByRole("link", { name: /Ficar a ver navios/ }).click();
+    await page.getByRole("link", { name: new RegExp(THIRD.text) }).click();
 
-    await expect(page).toHaveURL(/\/\?expression=ver-navios$/);
+    await expect(page).toHaveURL(new RegExp(`/\\?expression=${THIRD.id}$`));
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      "Ficar a ver navios",
+      THIRD.text,
     );
   });
 
@@ -94,7 +101,21 @@ test.describe("all expressions", () => {
     await page.getByLabel("Buscar expressão").fill("pe na jaca");
 
     await expect(
-      page.getByText(`4 de ${TOTAL_EXPRESSIONS}`, { exact: true }),
+      page.getByText(`${positionOf("pe-na-jaca")} de ${TOTAL_EXPRESSIONS}`, {
+        exact: true,
+      }),
     ).toBeVisible();
+  });
+
+  test("each card shows how the entry is classified", async ({ page }) => {
+    await open(page, "/expressions");
+    const cards = page.locator("main a");
+
+    await expect(cards.first()).toContainText("Expressão popular");
+
+    await page.getByLabel("Buscar expressão").fill(FIRST_NOUN_PHRASE.text);
+    await expect(
+      page.getByRole("link", { name: new RegExp(FIRST_NOUN_PHRASE.text) }),
+    ).toContainText("Locução substantiva");
   });
 });

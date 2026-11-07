@@ -1,12 +1,13 @@
 import { expect, test } from "@playwright/test";
 
-import { expressions } from "../src/data/expressions";
+import { entries } from "../src/data/entries";
 import {
   FIRST_EXPRESSION,
   LAST_EXPRESSION,
   open,
   MOBILE_PAGE_SIZE,
   MOBILE_TOTAL_PAGES,
+  SECOND,
   swipe,
   TOTAL_EXPRESSIONS,
 } from "./helpers";
@@ -68,7 +69,7 @@ test.describe("mobile", () => {
     await expect(title).toHaveText(FIRST_EXPRESSION.text);
 
     await swipe(page, "left");
-    await expect(title).toHaveText("Boi de piranha");
+    await expect(title).toHaveText(SECOND.text);
 
     await swipe(page, "right");
     await expect(title).toHaveText(FIRST_EXPRESSION.text);
@@ -105,13 +106,13 @@ test.describe("mobile", () => {
     await open(page, "/");
     await swipe(page, "left");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      "Boi de piranha",
+      SECOND.text,
     );
 
     await open(page, "/");
 
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      "Boi de piranha",
+      SECOND.text,
     );
   });
 
@@ -196,22 +197,20 @@ test.describe("mobile", () => {
   test("the page height follows the current expression, not its neighbors", async ({
     page,
   }) => {
-    const size = (item: (typeof expressions)[number]) =>
+    const size = (item: (typeof entries)[number]) =>
       item.origin.length + item.why.length + item.example.length;
     const gap = (index: number) =>
       Math.max(
-        size(expressions[(index + 1) % expressions.length]),
-        size(
-          expressions[(index + expressions.length - 1) % expressions.length],
-        ),
-      ) - size(expressions[index]);
-    const shortest = expressions.reduce(
+        size(entries[(index + 1) % entries.length]),
+        size(entries[(index + entries.length - 1) % entries.length]),
+      ) - size(entries[index]);
+    const shortest = entries.reduce(
       (best, _, index) => (gap(index) > gap(best) ? index : best),
       0,
     );
 
     await page.setViewportSize({ width: 412, height: 1400 });
-    await open(page, `/?expression=${expressions[shortest].id}`);
+    await open(page, `/?expression=${entries[shortest].id}`);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 
     const extra = await page.evaluate(() => {

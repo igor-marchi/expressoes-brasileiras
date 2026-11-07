@@ -16,7 +16,7 @@ import {
 import { ExpressionSwiper } from "@/components/expression-swiper";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { expressions } from "@/data/expressions";
+import { entries } from "@/data/entries";
 import { useFavorites } from "@/hooks/use-favorites";
 import { useIsMobile } from "@/hooks/use-is-mobile";
 import {
@@ -24,7 +24,7 @@ import {
   useLastExpression,
 } from "@/hooks/use-last-expression";
 
-const total = expressions.length;
+const total = entries.length;
 
 function isTypingTarget(target: EventTarget | null) {
   if (!(target instanceof HTMLElement)) return false;
@@ -44,9 +44,9 @@ export function ExpressionViewer({
   const isMobile = useIsMobile();
   const { isFavorite, toggle } = useFavorites();
 
-  const lastIndex = expressions.findIndex((item) => item.id === lastId);
+  const lastIndex = entries.findIndex((item) => item.id === lastId);
   const index = selected ?? Math.max(lastIndex, 0);
-  const expression = expressions[index];
+  const expression = entries[index];
   const favorite = isFavorite(expression.id);
   const ready =
     isMobile !== undefined && (selected !== null || lastId !== undefined);
@@ -110,7 +110,7 @@ export function ExpressionViewer({
     return (
       <main className="flex min-h-0 flex-1 flex-col">
         <div className="mx-auto w-full max-w-6xl px-5 pt-6">
-          <ExpressionCounter index={index} />
+          <ExpressionCounter index={index} kind={expression.kind} />
         </div>
         <ExpressionSwiper index={index} onChange={setSelected} />
 

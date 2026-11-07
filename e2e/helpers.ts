@@ -1,8 +1,8 @@
 import type { Page } from "@playwright/test";
 
-import { expressions } from "../src/data/expressions";
+import { entries } from "../src/data/entries";
 
-export const TOTAL_EXPRESSIONS = expressions.length;
+export const TOTAL_EXPRESSIONS = entries.length;
 export const PAGE_SIZE = 10;
 export const MOBILE_PAGE_SIZE = 5;
 export const MOBILE_TOTAL_PAGES = Math.ceil(
@@ -10,8 +10,15 @@ export const MOBILE_TOTAL_PAGES = Math.ceil(
 );
 export const TOTAL_PAGES = Math.ceil(TOTAL_EXPRESSIONS / PAGE_SIZE);
 export const TAIL_SIZE = TOTAL_EXPRESSIONS - PAGE_SIZE * (TOTAL_PAGES - 1);
-export const FIRST_EXPRESSION = expressions[0];
-export const LAST_EXPRESSION = expressions[expressions.length - 1];
+export const SECOND = entries[1];
+export const THIRD = entries[2];
+export const positionOf = (id: string) =>
+  entries.findIndex((item) => item.id === id) + 1;
+export const FIRST_NOUN_PHRASE = entries.find(
+  (item) => item.kind === "noun-phrase",
+)!;
+export const FIRST_EXPRESSION = entries[0];
+export const LAST_EXPRESSION = entries[entries.length - 1];
 
 /**
  * Navigates and waits for React to hydrate, so clicks are not lost

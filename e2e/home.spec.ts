@@ -2,6 +2,10 @@ import { expect, test, type Page } from "@playwright/test";
 
 import {
   FIRST_EXPRESSION,
+  FIRST_NOUN_PHRASE,
+  positionOf,
+  SECOND,
+  THIRD,
   LAST_EXPRESSION,
   open,
   TOTAL_EXPRESSIONS,
@@ -31,7 +35,7 @@ test.describe("home", () => {
     await page.getByRole("button", { name: "Próximo" }).click();
 
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      "Boi de piranha",
+      SECOND.text,
     );
     await expect(page.getByText(`2 de ${TOTAL_EXPRESSIONS}`)).toBeVisible();
   });
@@ -69,7 +73,7 @@ test.describe("home", () => {
   });
 
   test("Anterior shows the previous expression", async ({ page }) => {
-    await open(page, "/?expression=boi-de-piranha");
+    await open(page, `/?expression=${SECOND.id}`);
 
     await page.getByRole("button", { name: "Anterior" }).click();
 
@@ -103,12 +107,12 @@ test.describe("home", () => {
     await page.keyboard.press("ArrowRight");
 
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      "Boi de piranha",
+      SECOND.text,
     );
   });
 
   test("the left arrow key shows the previous expression", async ({ page }) => {
-    await open(page, "/?expression=boi-de-piranha");
+    await open(page, `/?expression=${SECOND.id}`);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 
     await page.keyboard.press("ArrowLeft");
@@ -165,7 +169,9 @@ test.describe("home", () => {
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
       "Pé na jaca",
     );
-    await expect(page.getByText(`4 de ${TOTAL_EXPRESSIONS}`)).toBeVisible();
+    await expect(
+      page.getByText(`${positionOf("pe-na-jaca")} de ${TOTAL_EXPRESSIONS}`),
+    ).toBeVisible();
   });
 
   test("an unknown ?expression= falls back to the first one", async ({
@@ -189,6 +195,22 @@ test.describe("home", () => {
       "Dar com os burros n'água",
     );
   });
+
+  test("shows how the expression is classified", async ({ page }) => {
+    await open(page, "/");
+    await expect(page.getByText("Expressão popular")).toBeVisible();
+    await expect(page.getByText("Locução substantiva")).toHaveCount(0);
+  });
+
+  test("a noun phrase is labeled as such", async ({ page }) => {
+    await open(page, `/?expression=${FIRST_NOUN_PHRASE.id}`);
+
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+      FIRST_NOUN_PHRASE.text,
+    );
+    await expect(page.getByText("Locução substantiva")).toBeVisible();
+    await expect(page.getByText("Expressão popular")).toHaveCount(0);
+  });
 });
 
 test.describe("home: last expression", () => {
@@ -201,11 +223,11 @@ test.describe("home: last expression", () => {
     await open(page, "/");
     await next(page).click();
     await next(page).click();
-    await expect(title(page)).toHaveText("Tirar o cavalinho da chuva");
+    await expect(title(page)).toHaveText(THIRD.text);
 
     await open(page, "/");
 
-    await expect(title(page)).toHaveText("Tirar o cavalinho da chuva");
+    await expect(title(page)).toHaveText(THIRD.text);
     await expect(page.getByText(`3 de ${TOTAL_EXPRESSIONS}`)).toBeVisible();
   });
 
@@ -217,7 +239,7 @@ test.describe("home: last expression", () => {
     await expect(page).toHaveURL(/\/expressions$/);
     await page.getByRole("link", { name: "Início", exact: true }).click();
 
-    await expect(title(page)).toHaveText("Boi de piranha");
+    await expect(title(page)).toHaveText(SECOND.text);
   });
 
   test("keeps going from where it stopped after a reload", async ({ page }) => {
@@ -227,7 +249,7 @@ test.describe("home: last expression", () => {
 
     await next(page).click();
 
-    await expect(title(page)).toHaveText("Tirar o cavalinho da chuva");
+    await expect(title(page)).toHaveText(THIRD.text);
   });
 
   test("?expression= wins over the saved one and becomes the new saved", async ({
@@ -269,6 +291,6 @@ test.describe("home: last expression", () => {
 
     await next(page).click();
 
-    await expect(title(page)).toHaveText("Boi de piranha");
+    await expect(title(page)).toHaveText(SECOND.text);
   });
 });

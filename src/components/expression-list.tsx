@@ -6,7 +6,7 @@ import { Search } from "lucide-react";
 
 import { ExpressionCardLink } from "@/components/expression-card-link";
 import { ListPagination } from "@/components/list-pagination";
-import { expressions } from "@/data/expressions";
+import { entries } from "@/data/entries";
 import { useIsMobile } from "@/hooks/use-is-mobile";
 
 const DESKTOP_PAGE_SIZE = 10;
@@ -57,7 +57,7 @@ export function ExpressionList() {
 
   const term = normalize(query.trim());
 
-  const items = expressions
+  const items = entries
     .map((expression, index) => ({ expression, index }))
     .filter(
       ({ expression }) =>
@@ -91,7 +91,7 @@ export function ExpressionList() {
             Todas as expressões
           </h1>
           <p className="text-lg text-muted-foreground">
-            {expressions.length} expressões. Escolha uma para ver origem e
+            {entries.length} expressões. Escolha uma para ver origem e
             significado.
           </p>
         </div>
@@ -121,7 +121,7 @@ export function ExpressionList() {
                 key={expression.id}
                 expression={expression}
                 position={index + 1}
-                total={expressions.length}
+                total={entries.length}
               />
             ))}
           </div>

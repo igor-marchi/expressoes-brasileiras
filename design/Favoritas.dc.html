@@ -43,7 +43,10 @@ button{font-family:inherit}
 <sc-for list="{{items}}" as="item" hint-placeholder-count="3">
 <div style="position: relative; display: flex; flex-direction: column">
 <a href="Main.dc.html" style="flex: 1; background: #FFFFFF; border: 1px solid #D9E0D6; border-radius: 8px; padding: 24px 68px 24px 28px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
 <span style="font-size: 13px; color: #0F6B43; font-weight: 600; letter-spacing: 0.08em">{{item.label}}</span>
+<span style="{{item.tagStyle}}">{{item.tagLabel}}</span>
+</div>
 <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 26px; line-height: 1.1; color: #14231B">{{item.text}}</span>
 <span style="font-size: 16px; line-height: 1.45; color: #4F5F56">{{item.meaning}}</span>
 </a>
@@ -77,12 +80,14 @@ class Component extends DCLogic {
   }
   renderVals() {
     const all = [
-      { id: "a", label: "1 DE 8", text: "Dar com os burros n'água", meaning: "Fracassar, ver um plano dar errado." },
-      { id: "b", label: "4 DE 8", text: "Pé na jaca", meaning: "Exagerar, sobretudo em comida, bebida ou festa." },
-      { id: "c", label: "6 DE 8", text: "Ficar a ver navios", meaning: "Esperar algo que não vai chegar, ou perder uma oportunidade." }
+      { id: "a", label: "1 DE 798", kind: "expression", text: "Dar com os burros n'água", meaning: "Fracassar, ver um plano dar errado." },
+      { id: "b", label: "4 DE 798", kind: "noun-phrase", text: "Cabelo ruim", meaning: "Forma de dizer que o cabelo crespo é difícil de tratar." },
+      { id: "c", label: "8 DE 798", kind: "noun-phrase", text: "Arraia-miúda", meaning: "O povo comum, as pessoas simples e sem poder." }
     ];
+    const LABELS = { expression: "Expressão popular", "noun-phrase": "Locução substantiva" };
+    const STYLES = { expression: "display: inline-flex; align-items: center; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; padding: 3px 10px; color: #4F5F56; background: #F4F6F1; border: 1px solid #D9E0D6", "noun-phrase": "display: inline-flex; align-items: center; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; padding: 3px 10px; color: #14231B; background: #FDF1C5; border: 1px solid #F5C518" };
     const kept = all.filter((x) => !this.state.removed[x.id]);
-    const items = kept.map((x) => ({ ...x, remove: () => this.setState({ removed: { ...this.state.removed, [x.id]: true } }) }));
+    const items = kept.map((x) => ({ ...x, tagLabel: LABELS[x.kind], tagStyle: STYLES[x.kind], remove: () => this.setState({ removed: { ...this.state.removed, [x.id]: true } }) }));
     const n = kept.length;
     return {
       items,

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type PointerEvent } from "react";
 
 import { ExpressionContent } from "@/components/expression-content";
-import { expressions } from "@/data/expressions";
+import { entries } from "@/data/entries";
 import { cn } from "@/lib/utils";
 
 const SWIPE_DISTANCE = 60;
@@ -22,7 +22,7 @@ export function ExpressionSwiper({
   index: number;
   onChange: (index: number) => void;
 }) {
-  const total = expressions.length;
+  const total = entries.length;
   const previous = (index + total - 1) % total;
   const next = (index + 1) % total;
 
@@ -114,14 +114,14 @@ export function ExpressionSwiper({
           inert
         >
           <ExpressionContent
-            expression={expressions[previous]}
+            expression={entries[previous]}
             index={previous}
             showCounter={false}
           />
         </div>
         <div className="flex flex-1 flex-col">
           <ExpressionContent
-            expression={expressions[index]}
+            expression={entries[index]}
             index={index}
             showCounter={false}
           />
@@ -132,7 +132,7 @@ export function ExpressionSwiper({
           inert
         >
           <ExpressionContent
-            expression={expressions[next]}
+            expression={entries[next]}
             index={next}
             showCounter={false}
           />

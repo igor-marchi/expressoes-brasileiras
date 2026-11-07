@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
 import { ExpressionViewer } from "@/components/expression-viewer";
-import { expressions } from "@/data/expressions";
+import { entries } from "@/data/entries";
 
 async function SelectedExpression({
   searchParams,
@@ -10,7 +10,7 @@ async function SelectedExpression({
 }) {
   const { expression } = await searchParams;
   const id = typeof expression === "string" ? expression : undefined;
-  const found = expressions.findIndex((item) => item.id === id);
+  const found = entries.findIndex((item) => item.id === id);
 
   return <ExpressionViewer key={id} initialIndex={found >= 0 ? found : null} />;
 }

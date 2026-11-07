@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Star } from "lucide-react";
 
 import { ExpressionCardLink } from "@/components/expression-card-link";
-import { expressions } from "@/data/expressions";
+import { entries } from "@/data/entries";
 import { useFavorites } from "@/hooks/use-favorites";
 
 function countLabel(count: number) {
@@ -16,7 +16,7 @@ function countLabel(count: number) {
 export function FavoritesList() {
   const { ids, loaded } = useFavorites();
 
-  const items = expressions
+  const items = entries
     .map((expression, index) => ({ expression, index }))
     .filter(({ expression }) => ids.includes(expression.id));
 
@@ -59,7 +59,7 @@ export function FavoritesList() {
               key={expression.id}
               expression={expression}
               position={index + 1}
-              total={expressions.length}
+              total={entries.length}
             />
           ))}
         </div>
