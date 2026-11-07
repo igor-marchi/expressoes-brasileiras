@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Todas as expressões</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+body{margin:0;font-family:'Instrument Sans',system-ui,sans-serif;color:#14231B;background:#F4F6F1}
+a{color:#14231B;text-decoration:none}a:hover{color:#0F6B43}
+</style>
+</helmet>
+<div style="min-height: 900px; background: #F4F6F1; display: flex; flex-direction: column; box-sizing: border-box">
+
+<header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 64px; border-bottom: 1px solid #D9E0D6">
+<div style="display: flex; align-items: center; gap: 12px">
+<div style="width: 36px; height: 36px; background: #0F6B43; display: flex; align-items: center; justify-content: center; border-radius: 50%">
+<div style="width: 14px; height: 14px; background: #F5C518; transform: rotate(45deg)"></div>
+</div>
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 22px">Expressões do Brasil</span>
+</div>
+<nav style="display: flex; gap: 32px; font-size: 16px; font-weight: 500">
+<a href="Main.dc.html">Início</a>
+<a href="Todas.dc.html" style="border-bottom: 2px solid #F5C518; padding-bottom: 4px">Todas</a>
+<a href="Favoritas.dc.html" style="color: #4F5F56">Favoritas</a>
+</nav>
+</header>
+
+<main style="max-width: 1152px; margin: 0 auto; width: 100%; box-sizing: border-box; padding: 48px 64px; display: flex; flex-direction: column; gap: 32px">
+
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 48px; letter-spacing: -0.02em">Todas as expressões</h1>
+<p style="margin: 0; font-size: 18px; color: #4F5F56">8 expressões. Escolha uma para ver origem e significado.</p>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #C3CDC0; border-radius: 999px; padding: 0 20px; min-height: 48px; width: 320px; max-width: 100%; box-sizing: border-box">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F5F56" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+<label for="busca" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Buscar expressão</label>
+<input id="busca" type="text" placeholder="Buscar expressão" style="flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-family: inherit; font-size: 16px; color: #14231B">
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+
+<div style="position: relative; display: flex; flex-direction: column">
+<a href="Main.dc.html" style="background: #FFFFFF; border: 1px solid #D9E0D6; border-radius: 8px; padding: 24px 68px 24px 28px; flex: 1; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; color: #0F6B43; font-weight: 600; letter-spacing: 0.08em">1 DE 8</span>
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 26px; line-height: 1.1; color: #14231B">Dar com os burros n'água</span>
+<span style="font-size: 16px; line-height: 1.45; color: #4F5F56">Fracassar, ver um plano dar errado.</span>
+</a>
+<button aria-label="Remover dos favoritos" aria-pressed="true" style="position: absolute; top: 14px; right: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: transparent; border: 0; border-radius: 999px; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="#F5C518" stroke="#0F6B43" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
+</div>
+
+<div style="position: relative; display: flex; flex-direction: column">
+<a href="Main.dc.html" style="background: #FFFFFF; border: 1px solid #D9E0D6; border-radius: 8px; padding: 24px 68px 24px 28px; flex: 1; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; color: #0F6B43; font-weight: 600; letter-spacing: 0.08em">2 DE 8</span>
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 26px; line-height: 1.1; color: #14231B">Boi de piranha</span>
+<span style="font-size: 16px; line-height: 1.45; color: #4F5F56">Pessoa sacrificada para que os outros passem em segurança.</span>
+</a>
+<button aria-label="Adicionar aos favoritos" aria-pressed="false" style="position: absolute; top: 14px; right: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: transparent; border: 0; border-radius: 999px; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4F5F56" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
+</div>
+
+<div style="position: relative; display: flex; flex-direction: column">
+<a href="Main.dc.html" style="background: #FFFFFF; border: 1px solid #D9E0D6; border-radius: 8px; padding: 24px 68px 24px 28px; flex: 1; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; color: #0F6B43; font-weight: 600; letter-spacing: 0.08em">3 DE 8</span>
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 26px; line-height: 1.1; color: #14231B">Tirar o cavalinho da chuva</span>
+<span style="font-size: 16px; line-height: 1.45; color: #4F5F56">Desistir de uma ideia ou de uma expectativa.</span>
+</a>
+<button aria-label="Adicionar aos favoritos" aria-pressed="false" style="position: absolute; top: 14px; right: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: transparent; border: 0; border-radius: 999px; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4F5F56" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
+</div>
+
+<div style="position: relative; display: flex; flex-direction: column">
+<a href="Main.dc.html" style="background: #FFFFFF; border: 1px solid #D9E0D6; border-radius: 8px; padding: 24px 68px 24px 28px; flex: 1; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; color: #0F6B43; font-weight: 600; letter-spacing: 0.08em">4 DE 8</span>
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 26px; line-height: 1.1; color: #14231B">Pé na jaca</span>
+<span style="font-size: 16px; line-height: 1.45; color: #4F5F56">Exagerar, sobretudo em comida, bebida ou festa.</span>
+</a>
+<button aria-label="Remover dos favoritos" aria-pressed="true" style="position: absolute; top: 14px; right: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: transparent; border: 0; border-radius: 999px; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="#F5C518" stroke="#0F6B43" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
+</div>
+
+<div style="position: relative; display: flex; flex-direction: column">
+<a href="Main.dc.html" style="background: #FFFFFF; border: 1px solid #D9E0D6; border-radius: 8px; padding: 24px 68px 24px 28px; flex: 1; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; color: #0F6B43; font-weight: 600; letter-spacing: 0.08em">5 DE 8</span>
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 26px; line-height: 1.1; color: #14231B">Rodar a baiana</span>
+<span style="font-size: 16px; line-height: 1.45; color: #4F5F56">Fazer escândalo, perder a compostura em público.</span>
+</a>
+<button aria-label="Adicionar aos favoritos" aria-pressed="false" style="position: absolute; top: 14px; right: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: transparent; border: 0; border-radius: 999px; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4F5F56" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
+</div>
+
+<div style="position: relative; display: flex; flex-direction: column">
+<a href="Main.dc.html" style="background: #FFFFFF; border: 1px solid #D9E0D6; border-radius: 8px; padding: 24px 68px 24px 28px; flex: 1; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; color: #0F6B43; font-weight: 600; letter-spacing: 0.08em">6 DE 8</span>
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 26px; line-height: 1.1; color: #14231B">Ficar a ver navios</span>
+<span style="font-size: 16px; line-height: 1.45; color: #4F5F56">Esperar algo que não vai chegar, ou perder uma oportunidade.</span>
+</a>
+<button aria-label="Remover dos favoritos" aria-pressed="true" style="position: absolute; top: 14px; right: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: transparent; border: 0; border-radius: 999px; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="#F5C518" stroke="#0F6B43" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
+</div>
+
+<div style="position: relative; display: flex; flex-direction: column">
+<a href="Main.dc.html" style="background: #FFFFFF; border: 1px solid #D9E0D6; border-radius: 8px; padding: 24px 68px 24px 28px; flex: 1; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; color: #0F6B43; font-weight: 600; letter-spacing: 0.08em">7 DE 8</span>
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 26px; line-height: 1.1; color: #14231B">Maria vai com as outras</span>
+<span style="font-size: 16px; line-height: 1.45; color: #4F5F56">Pessoa sem opinião própria, que faz o que a maioria faz.</span>
+</a>
+<button aria-label="Adicionar aos favoritos" aria-pressed="false" style="position: absolute; top: 14px; right: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: transparent; border: 0; border-radius: 999px; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4F5F56" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
+</div>
+
+<div style="position: relative; display: flex; flex-direction: column">
+<a href="Main.dc.html" style="background: #FFFFFF; border: 1px solid #D9E0D6; border-radius: 8px; padding: 24px 68px 24px 28px; flex: 1; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; color: #0F6B43; font-weight: 600; letter-spacing: 0.08em">8 DE 8</span>
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 26px; line-height: 1.1; color: #14231B">Onde Judas perdeu as botas</span>
+<span style="font-size: 16px; line-height: 1.45; color: #4F5F56">Lugar muito distante, de difícil acesso.</span>
+</a>
+<button aria-label="Adicionar aos favoritos" aria-pressed="false" style="position: absolute; top: 14px; right: 14px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: transparent; border: 0; border-radius: 999px; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4F5F56" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
+</div>
+
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

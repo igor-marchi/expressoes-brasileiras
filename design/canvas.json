@@ -1,0 +1,64 @@
+{
+  "v": 3,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-11-07T12:00:00Z"
+  },
+  "title": "Expressões do Brasil",
+  "launch": {
+    "view": "canvas"
+  },
+  "pages": [],
+  "boards": {
+    "Main.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 820,
+      "title": "Expressão (desktop)",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Mobile.dc.html": {
+      "x": 1360,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Expressão (celular)"
+    },
+    "Todas.dc.html": {
+      "x": 0,
+      "y": 940,
+      "w": 1280,
+      "h": 900,
+      "title": "Todas as expressões",
+      "expand": "fill"
+    },
+    "Favoritas.dc.html": {
+      "x": 1360,
+      "y": 940,
+      "w": 1280,
+      "h": 900,
+      "title": "Favoritas",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "FavoritasVazio.dc.html": {
+      "x": 0,
+      "y": 1960,
+      "w": 1280,
+      "h": 700,
+      "title": "Favoritas (vazio)",
+      "expand": "fill"
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Mobile.dc.html",
+    "Todas.dc.html",
+    "Favoritas.dc.html",
+    "FavoritasVazio.dc.html"
+  ],
+  "notes": {},
+  "designSystems": []
+}

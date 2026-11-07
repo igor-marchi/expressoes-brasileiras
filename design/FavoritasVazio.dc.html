@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Favoritas vazio</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+body{margin:0;font-family:'Instrument Sans',system-ui,sans-serif;color:#14231B;background:#F4F6F1}
+a{color:#14231B;text-decoration:none}a:hover{color:#0F6B43}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="min-height: 700px; background: #F4F6F1; display: flex; flex-direction: column; box-sizing: border-box">
+
+<header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 64px; border-bottom: 1px solid #D9E0D6">
+<div style="display: flex; align-items: center; gap: 12px">
+<div style="width: 36px; height: 36px; background: #0F6B43; display: flex; align-items: center; justify-content: center; border-radius: 50%">
+<div style="width: 14px; height: 14px; background: #F5C518; transform: rotate(45deg)"></div>
+</div>
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 22px">Expressões do Brasil</span>
+</div>
+<nav style="display: flex; gap: 32px; font-size: 16px; font-weight: 500">
+<a href="Main.dc.html">Início</a>
+<a href="Todas.dc.html">Todas</a>
+<a href="Favoritas.dc.html" style="border-bottom: 2px solid #F5C518; padding-bottom: 4px">Favoritas</a>
+</nav>
+</header>
+
+<main style="max-width: 1152px; margin: 0 auto; width: 100%; box-sizing: border-box; padding: 48px 64px; display: flex; flex-direction: column; gap: 32px">
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 48px; letter-spacing: -0.02em">Favoritas</h1>
+<p style="margin: 0; font-size: 18px; color: #4F5F56">Você ainda não favoritou nada.</p>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; padding: 72px 24px; background: #FFFFFF; border: 1px solid #D9E0D6; border-radius: 8px">
+<div style="width: 72px; height: 72px; border-radius: 50%; background: #F4F6F1; border: 1px solid #D9E0D6; display: flex; align-items: center; justify-content: center">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4F5F56" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+</div>
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 30px; letter-spacing: -0.01em">Nenhuma favorita ainda</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.5; color: #4F5F56; max-width: 420px">Toque na estrela de uma expressão para guardá-la aqui e reler depois.</p>
+<a href="Todas.dc.html" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 28px; background: #0F6B43; color: #FFFFFF; border-radius: 999px; font-size: 18px; font-weight: 600">Ver todas as expressões</a>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":700}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>
